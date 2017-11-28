@@ -98,7 +98,7 @@ public class PessoaFisica extends Pessoa {
     }
     //metodo estatico que recebe uma string no formato dd-MM-yyyy e devolve uma data
     public static Date FormatarData(String data_s) throws ParseException{
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");        
         Date d = df.parse(data_s);
         return d;
     }

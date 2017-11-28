@@ -6,12 +6,14 @@ import Entidades.Pessoa;
 import Entidades.PessoaFisica;
 import Entidades.RespFinFisico;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 public class CadastraRespFinFisico implements Logica {
 
@@ -39,9 +41,13 @@ public class CadastraRespFinFisico implements Logica {
             dataNasc = PessoaFisica.FormatarData(data);
         } catch (ParseException ex) {
             Logger.getLogger(CadastraRespFinFisico.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao selecionar a Data de Nascimento!");
             sessao.setAttribute("erro", "Erro ao selecionar a Data de Nascimento!");
-            return "CadastroRespFinFisica.jsp"; 
-        }
+        }     
+     
+        
+           
+        
         //Validações dos compos do formulário
         if (nome == null) {
             sessao.setAttribute("msgErro", "Nome não pode ser vazio!");
