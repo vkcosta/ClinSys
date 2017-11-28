@@ -2,18 +2,15 @@ package logica;
 
 import DAO.BD_2;
 import Entidades.Endereco;
-import Entidades.Pessoa;
 import Entidades.PessoaFisica;
 import Entidades.RespFinFisico;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 public class CadastraRespFinFisico implements Logica {
 
@@ -24,10 +21,10 @@ public class CadastraRespFinFisico implements Logica {
         Date dataNasc = new Date();
         //Recupeção dos dados digitados no formulário
         String nome = request.getParameter("nome");
-        //String dia = request.getParameter("dia");
-        // String mes = request.getParameter("mes");
-        // String ano = request.getParameter("ano");
-        String data = request.getParameter("data");
+        String dia = request.getParameter("dia");
+        String mes = request.getParameter("mes");
+        String ano = request.getParameter("ano");
+        
         String cpf = request.getParameter("cpf");
         String rg = request.getParameter("rg");
         char sexo = request.getParameter("sexo").charAt(0);
@@ -36,7 +33,7 @@ public class CadastraRespFinFisico implements Logica {
         String email = request.getParameter("email");
         String telFixo = request.getParameter("telFixo");
         String telCelular = request.getParameter("telCelular");
-        //String data = dia + mes + ano;
+        String data = dia + mes + ano;
         try {
             dataNasc = PessoaFisica.FormatarData(data);
         } catch (ParseException ex) {

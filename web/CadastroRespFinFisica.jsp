@@ -68,10 +68,8 @@
                         <td width="50px">
                             <label>*Nascimento: </label>
                         </td>
-                            <td>
-                        <input type="date" name="data" required>
-                       </td>
-                        <!--<td align="rigth">
+                           
+                        <td align="rigth">
                             <select name="dia" pattern="^\d{2}$" title="Dia" required >
                                 <option value="" placeholder="Dia"/> </option>
                                 <% for (int k = 1; k <= 31; k++) {%>
@@ -91,7 +89,7 @@
                                 <%}%>
                             </select>
 
-                        </td>   -->                     
+                        </td>                     
                     </tr>
                     <tr>
                         <td>
