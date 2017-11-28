@@ -19,7 +19,7 @@
     if (sessao == null) {
         sessao.setAttribute("mensagem", "sessao vazia");
         response.sendRedirect("index.jsp");
-    }   
+    }
 %>
 
 
@@ -54,12 +54,12 @@
                 </table>
             </fieldset>           
         </form>
-        
+
         <br>
         <% responsavel = (RespFinFisico) sessao.getAttribute("rff");
         %>
         <%if (responsavel != null) {%>
-        
+
         <fieldset>
             <legend>Dados Pessoais</legend>
             <table cellspacing="10" >
@@ -78,11 +78,11 @@
                         <% String status;
                             if (responsavel.getstatus()) {
                                 status = "Ativo";
-                            }else {
+                            } else {
                                 status = "Inativo";
                             }
                         %>
-                        <input class="form-control" id="disabledInput" disabled="" type="text" name="id" value="<%=status %>">
+                        <input class="form-control" id="disabledInput" disabled="" type="text" name="id" value="<%=status%>">
                     </td>
                 </tr>
                 <tr>
@@ -212,17 +212,17 @@
                 </tr>
             </table>
         </fieldset> 
-        <%}else{%>
-        <% String erroRespFin = (String)sessao.getAttribute("erroRespFin"); %>
-        
-        <%if(erroRespFin != null){%>
+        <%} else {%>
+        <% String erroRespFin = (String) sessao.getAttribute("erroRespFin"); %>
+
+        <%if (erroRespFin != null) {%>
         <script>
             var erroRespFin = "<%= erroRespFin%>";
             alert(erroRespFin);
         </script>
-                <%}%>
+        <%}%>
         <%}%>           
         <%sessao.removeAttribute("rff"); %>        
+        <%sessao.removeAttribute("erroRespFin");%>        
     </body>
 </html>
-
