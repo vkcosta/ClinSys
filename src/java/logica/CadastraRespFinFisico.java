@@ -2,6 +2,7 @@ package logica;
 
 import DAO.BD_2;
 import Entidades.Endereco;
+import Entidades.Pessoa;
 import Entidades.PessoaFisica;
 import Entidades.RespFinFisico;
 import java.text.ParseException;
@@ -24,7 +25,7 @@ public class CadastraRespFinFisico implements Logica {
         String dia = request.getParameter("dia");
         String mes = request.getParameter("mes");
         String ano = request.getParameter("ano");
-        
+
         String cpf = request.getParameter("cpf");
         String rg = request.getParameter("rg");
         char sexo = request.getParameter("sexo").charAt(0);
@@ -33,18 +34,14 @@ public class CadastraRespFinFisico implements Logica {
         String email = request.getParameter("email");
         String telFixo = request.getParameter("telFixo");
         String telCelular = request.getParameter("telCelular");
-        String data = dia + mes + ano;
+        String data = dia + "/" + mes + "/" + ano;
         try {
             dataNasc = PessoaFisica.FormatarData(data);
         } catch (ParseException ex) {
             Logger.getLogger(CadastraRespFinFisico.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Erro ao selecionar a Data de Nascimento!");
             sessao.setAttribute("erro", "Erro ao selecionar a Data de Nascimento!");
-        }     
-     
-        
-           
-        
+            return "CadastroRespFinFisica.jsp";
+        }
         //Validações dos compos do formulário
         if (nome == null) {
             sessao.setAttribute("msgErro", "Nome não pode ser vazio!");
@@ -80,8 +77,8 @@ public class CadastraRespFinFisico implements Logica {
         //Verifica se o CPF informado já existe no banco de dados
         if (verificaCPF != 0) {
             sessao.setAttribute("msgErro", "Já existe um cadastro com esse CPF!");
-            return "CadastroRespFinFisica.jsp"; 
-        }        
+            return "CadastroRespFinFisica.jsp";
+        }
         //Pegar o código do endereço cadastrado anteriormente
         e.setcodigo(BD_2.getCodEndereco(new String(e.getcep()), e.getnumero()));
         rff.setendereco(e);

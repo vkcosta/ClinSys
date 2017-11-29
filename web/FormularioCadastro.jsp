@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="Entidades.RespFinFisico"%>
 <%@page import="Entidades.Pessoa"%>
 <%@page import="Entidades.Usuario"%>
@@ -21,14 +22,19 @@
         <table cellspacing="10" >
             <tr>
                 <td>
-                    <label for="idRespFin"> ID Resp. Financeiro: </label>
+                    <label for="idRespFin"> Responsável Financeiro: </label>
                 </td>
-                <td align="left">
-                    <input type="text" name="idRespFin" placeholder="Id do Resp. Financeiro" required autofocus>
+                <td align="left">               
+                    
+                    <select>
+                    <c:forEach var="resp" items="${listaRespFin}">
+                        <option value="${resp.idPessoa}">${resp.nome}</option>
+                    </c:forEach>
+                    </select>
                 </td>
                 <td>
                     <input type="hidden" name="logica" value="PesquisaRespFin"/>
-                    <button >Pesquisar</button>
+                    <button >Selecionar</button>
                 </td>
                 <% if(responsavel != null){ %>
                 <td>

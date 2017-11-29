@@ -52,7 +52,7 @@ public class BD_2 {
     public static void add(PessoaFisica p) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "INSERT INTO Pessoa (endereco,nome,email,status) "
-                + "values (?,?,?,?)";
+            + "values (?,?,?,?)";
         try {
             con.setAutoCommit(false); //precavendo possiveis merdas aqui...
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -68,12 +68,12 @@ public class BD_2 {
             }
             con.close();
             System.out.println("Pessoa gravada. aguardando a tabela de PF..");
-            try {                
+            try {
                 try (Connection con2 = new ConnectionFactory().getConnection()) {
                     con2.setAutoCommit(false); //Acertado aqui
                     String sql2 = "INSERT INTO PessoaFisica "
-                            + "(id, dataNasc, rg, cpf, sexo, celular) "
-                            + "values (?, ?, ?, ?, ?, ?)";
+                        + "(id, dataNasc, rg, cpf, sexo, celular) "
+                        + "values (?, ?, ?, ?, ?, ?)";
                     int id = BD_2.getidPessoa(p.getnome(), p.getemail());
                     java.sql.Date nasc = p.getdataNascDateObj();
                     String rg = p.getrg();
@@ -125,8 +125,8 @@ public class BD_2 {
             con.close();
             System.out.println("RespFinFisico gravado na ID.: " + id);
             //JOptionPane.showMessageDialog(null, "Responsável Registrado com Sucesso!"
-              //      + "\nID do Responsável: " + id + "\n"
-              //      + "Còdigo do Endereco: " + rf.getendereco().getcodigo());
+            //      + "\nID do Responsável: " + id + "\n"
+            //      + "Còdigo do Endereco: " + rf.getendereco().getcodigo());
         } catch (HeadlessException | SQLException ex) {
             System.out.println("Falha ao gravar em RespFinFisico.: " + ex);
             //JOptionPane.showMessageDialog(null, "Falha ao gravar em RespFinFisico.: " + ex);
@@ -145,7 +145,7 @@ public class BD_2 {
             //capturo o ID gerado pelo MySQL
             int id = BD_2.getidPessoa(p.getcpf());
             try ( //informo à statement os IDs envolvidos.
-                    PreparedStatement stmt = con.prepareStatement(sql)) {
+                PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setInt(1, id);
                 //dentro do objeto p há um outro objeto pessoa q é o respfin. aqui eu capturo o seu id
                 stmt.setInt(2, p.getRespFin().getidPessoa());
@@ -154,8 +154,8 @@ public class BD_2 {
             con.close();
             System.out.println("Paciente armazenado. ID: " + id);
             //JOptionPane.showMessageDialog(null, "Paciente registrado com sucesso\n"
-                 //   + "ID do Paciente: " + id + "\n"
-                //    + "Codigo do Endereco: " + p.getendereco().getcodigo());
+            //   + "ID do Paciente: " + id + "\n"
+            //    + "Codigo do Endereco: " + p.getendereco().getcodigo());
         } catch (HeadlessException | SQLException e) {
             System.out.println("Falha ao gravar Paciente.: " + e);
             //JOptionPane.showMessageDialog(null, "Falha ao gravar Paciente.: \n" + e);
@@ -166,7 +166,7 @@ public class BD_2 {
     public static void add(RespFinJuridico pj) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "INSERT INTO Pessoa (Endereco,nome,email,status) "
-                + "values (?,?,?,?)";
+            + "values (?,?,?,?)";
         try {
             con.setAutoCommit(false);
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -208,8 +208,8 @@ public class BD_2 {
             con2.close();
             System.out.println("RespFinJuridico gravado na ID.: " + id);
             //JOptionPane.showMessageDialog(null, "Pessoa Juridica armazenada com sucesso!\n"
-              //      + "ID do Responsável: " + id + "\n"
-             //       + "Código do endereco: " + pj.getendereco().getcodigo());
+            //      + "ID do Responsável: " + id + "\n"
+            //       + "Código do endereco: " + pj.getendereco().getcodigo());
 
         } catch (HeadlessException | SQLException e) {
             System.out.println("Erro ao gravar respfin.: " + e);
@@ -239,7 +239,7 @@ public class BD_2 {
 
         } catch (HeadlessException | SQLException e) {
             System.out.println("Erro ao cadastrar Usuario.: " + e);
-           // JOptionPane.showMessageDialog(null, "Erro ao cadastrar Usuario\n " + e);
+            // JOptionPane.showMessageDialog(null, "Erro ao cadastrar Usuario\n " + e);
         }
 
     }
@@ -258,7 +258,7 @@ public class BD_2 {
             }
             con.close();
             System.out.println("Paciente armazenado com sucesso na ID: " + id);
-           // JOptionPane.showMessageDialog(null, "Paciente armazenado com sucesso\nID: " + id);
+            // JOptionPane.showMessageDialog(null, "Paciente armazenado com sucesso\nID: " + id);
         } catch (HeadlessException | SQLException e) {
             System.out.println("Erro ao registrar paciente.:" + e);
             //JOptionPane.showMessageDialog(null, "Erro ao registrar paciente\n" + e);
@@ -279,7 +279,7 @@ public class BD_2 {
             }
             con.close();
         } catch (SQLException e) {
-            
+
         }
     }
 
@@ -290,10 +290,10 @@ public class BD_2 {
     public static void update(Endereco e) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "UPDATE Endereco SET "
-                + "cep = " + e.getcep() + ", "
-                + "numero = " + e.getnumero() + ", "
-                + "telfixo = " + e.gettelFixo()
-                + " WHERE codigo = " + e.getcodigo();
+            + "cep = " + e.getcep() + ", "
+            + "numero = " + e.getnumero() + ", "
+            + "telfixo = " + e.gettelFixo()
+            + " WHERE codigo = " + e.getcodigo();
 
         try {
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -358,13 +358,13 @@ public class BD_2 {
                 return en;
             } else {
                 System.out.println("Nenhum Endereço corresponde ao código informado");
-             //   JOptionPane.showMessageDialog(null, "Endereço não encontrado");
+                //   JOptionPane.showMessageDialog(null, "Endereço não encontrado");
                 return null;
             }
 
         } catch (HeadlessException | SQLException ex) {
             System.out.println("Erro ao tentar obter Lista de Endereços: " + ex);
-           // JOptionPane.showMessageDialog(null, "Erro ao tentar obter Lista de Endereços\n" + ex);
+            // JOptionPane.showMessageDialog(null, "Erro ao tentar obter Lista de Endereços\n" + ex);
             return null;
         }
     }
@@ -387,7 +387,7 @@ public class BD_2 {
             }
 
         } catch (HeadlessException | SQLException ex) {
-           // System.out.println("Erro ao obter ID de Pessoa.: " + ex);
+            // System.out.println("Erro ao obter ID de Pessoa.: " + ex);
             //JOptionPane.showMessageDialog(null, "Erro ao obter ID de Pessoa\n" + ex);
             return 0;
         }
@@ -397,7 +397,7 @@ public class BD_2 {
     public static int getidPessoa(String nome, String email) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT id FROM Pessoa WHERE nome = '" + nome
-                + "' AND email = '" + email + "'";
+            + "' AND email = '" + email + "'";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -407,13 +407,13 @@ public class BD_2 {
                 return id;
             } else {
                 System.out.println("ID não encontrado");
-             //   JOptionPane.showMessageDialog(null, "ID não encontrado");
+                //   JOptionPane.showMessageDialog(null, "ID não encontrado");
                 return 0;
             }
 
         } catch (HeadlessException | SQLException ex) {
             System.out.println("Erro ao obter ID de Pessoa.: " + ex);
-           // JOptionPane.showMessageDialog(null, "Erro ao obter ID de Pessoa\n" + ex);
+            // JOptionPane.showMessageDialog(null, "Erro ao obter ID de Pessoa\n" + ex);
             return 0;
         }
     }
@@ -422,8 +422,8 @@ public class BD_2 {
     public static PessoaFisica getPessoaFisica(int id) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT * FROM Pessoa join PessoaFisica on "
-                + "Pessoa.id = PessoaFisica.id "
-                + "WHERE Pessoa.id = (?);";
+            + "Pessoa.id = PessoaFisica.id "
+            + "WHERE Pessoa.id = (?);";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -459,17 +459,17 @@ public class BD_2 {
                 return pf;
             } else {
                 System.out.println("A Busca não encontrou um RespFin com o ID " + id);
-               // JOptionPane.showMessageDialog(null, "A Busca não encontrou um RespFin com o ID " + id);
+                // JOptionPane.showMessageDialog(null, "A Busca não encontrou um RespFin com o ID " + id);
                 return null;
             }
 
         } catch (SQLException ex) {
             System.out.println("Erro ao buscar o RespFinFisico.: " + ex);
-           // JOptionPane.showMessageDialog(null, "Erro ao buscar o RespFinFisico.: " + ex);
+            // JOptionPane.showMessageDialog(null, "Erro ao buscar o RespFinFisico.: " + ex);
             return null;
         }
-    }    
-   
+    }
+
     public static Pessoa getRespFin(int id) {
         Connection con = new ConnectionFactory().getConnection();
         try {
@@ -524,15 +524,55 @@ public class BD_2 {
                 } else {
                     //System.out.println("O ID informado não pertence a nenhum responsável Financeiro");
                     //JOptionPane.showMessageDialog(null, "O ID informado não pertence a nenhum responsável Financeiro");
-                return null;
+                    return null;
                 }
             }
         } catch (HeadlessException | SQLException e) {
             //System.out.println("Erro ao buscar respfin.: " + e);
             //JOptionPane.showMessageDialog(null, "Erro ao buscar Responsáveis.\n" + e);
-        
+
         }
         return null;
+    }
+
+    public static List<Pessoa> getAllRespFin() {
+        Connection con = new ConnectionFactory().getConnection();
+        List<Pessoa> lista = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT Pessoa.id,endereco,nome,email,status,dataNasc,rg,cpf,sexo,celular,cep,numero,telFixo\n"
+                + "    FROM Pessoa JOIN PessoaFisica\n"
+                + "        ON Pessoa.id = PessoaFisica.id JOIN RespFinFisico\n"
+                + "            ON RespFinFisico.id = Pessoa.id JOIN Endereco\n"
+                + "                ON Endereco.codigo = endereco");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                RespFinFisico rf = new RespFinFisico();
+                rf.setcelular(rs.getString("celular"));
+                rf.setcpf(rs.getString("cpf"));
+                rf.setdataNasc(rs.getDate("dataNasc"));
+                rf.setemail(rs.getString("email"));
+
+                Endereco en = new Endereco();
+                en.setcep(rs.getString("cep").toCharArray());
+                en.setcodigo(rs.getInt("endereco"));
+                en.setnumero(rs.getInt("numero"));
+                en.settelFixo(rs.getString("telFixo").toCharArray());
+                rf.setendereco(en);
+
+                rf.setidPessoa(rs.getInt("id"));
+                rf.setnome(rs.getString("nome"));
+                rf.setrg(rs.getString("rg"));
+                rf.setsexo(rs.getString("sexo").charAt(0));
+                rf.setstatus((rs.getInt("status") != 0));
+                lista.add(rf);
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.out.println("Erro ao buscar respfin.: " + e);
+            //JOptionPane.showMessageDialog(null, "Erro ao buscar Responsáveis.\n" + e);
+
+        }
+        return lista;
     }
 
     //CAPTURA RESPFINJURIDICO PELO CNPJ
@@ -545,7 +585,7 @@ public class BD_2 {
             if (rs.next()) {
                 return getRespFin(rs.getInt(1));
             } else {
-              //  JOptionPane.showMessageDialog(null, "Nenhum registro encontrado");
+                //  JOptionPane.showMessageDialog(null, "Nenhum registro encontrado");
             }
         } catch (Exception e) {
             System.out.println("Erro ao buscar respfin.: " + e);
@@ -564,7 +604,7 @@ public class BD_2 {
             if (rs.next()) {
                 return getRespFin(rs.getInt(1));
             } else {
-             //   JOptionPane.showMessageDialog(null, "Nenhum registro encontrado");
+                //   JOptionPane.showMessageDialog(null, "Nenhum registro encontrado");
             }
         } catch (Exception e) {
             System.out.println("Erro ao buscar respfin.: " + e);
@@ -577,11 +617,11 @@ public class BD_2 {
     public static Usuario getUsuario(String login) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT endereco,nome,email,status,dataNasc,rg,cpf,sexo,celular,cep,numero,telFixo,login,senha,Pessoa.id as ID"
-                + "    FROM Pessoa JOIN PessoaFisica"
-                + "        ON Pessoa.id = PessoaFisica.id JOIN Usuario"
-                + "            ON Usuario.id = Pessoa.id JOIN Endereco"
-                + "                ON Endereco.codigo = endereco"
-                + "    WHERE Pessoa.id = (SELECT id FROM Usuario WHERE Usuario.login = ?)";
+            + "    FROM Pessoa JOIN PessoaFisica"
+            + "        ON Pessoa.id = PessoaFisica.id JOIN Usuario"
+            + "            ON Usuario.id = Pessoa.id JOIN Endereco"
+            + "                ON Endereco.codigo = endereco"
+            + "    WHERE Pessoa.id = (SELECT id FROM Usuario WHERE Usuario.login = ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, login);
@@ -617,14 +657,14 @@ public class BD_2 {
         } catch (HeadlessException | SQLException e) {
             return null;
         }
-        
+
     }
 
     //CAPTURA O CODIGO(ID) DE UM ENDERECO
     public static int getCodEndereco(String cep, int num) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT codigo FROM Endereco WHERE"
-                + " cep = ? AND numero = ?";
+            + " cep = ? AND numero = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cep);
@@ -640,7 +680,7 @@ public class BD_2 {
         } catch (HeadlessException | SQLException e) {
             //System.out.println("Erro ao tentar obter o codigo do Endereco.: " + e);
             //JOptionPane.showMessageDialog(null, "Erro ao tentar obter o codigo do Endereco\n" + e);
-            
+
         }
         return 0;
     }
@@ -687,8 +727,8 @@ public class BD_2 {
     public static Pessoa getPessoa(int id) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT endereco,nome,email,status,cep,numero,telFixo FROM Pessoa "
-                + "JOIN Endereco ON Pessoa.endereco = Endereco.codigo "
-                + "WHERE Pessoa.id = " + id;
+            + "JOIN Endereco ON Pessoa.endereco = Endereco.codigo "
+            + "WHERE Pessoa.id = " + id;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -711,11 +751,11 @@ public class BD_2 {
 
             } else {
                 System.out.println("A busca pela Pessoa não encontrou resultados");
-               // JOptionPane.showMessageDialog(null, "A busca pela Pessoa não encontrou resultados");
+                // JOptionPane.showMessageDialog(null, "A busca pela Pessoa não encontrou resultados");
             }
         } catch (HeadlessException | SQLException ex) {
             System.out.println("Erro ao buscar Pessoa no banco de dados.: " + ex);
-           // JOptionPane.showMessageDialog(null, "Erro ao buscar Pessoa no banco de dados\n" + ex);
+            // JOptionPane.showMessageDialog(null, "Erro ao buscar Pessoa no banco de dados\n" + ex);
         }
         return null;
     }
@@ -737,7 +777,7 @@ public class BD_2 {
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar Pessoa.: " + e);
-          //  JOptionPane.showMessageDialog(null, "Erro ao buscar Pessoa\n" + e);
+            //  JOptionPane.showMessageDialog(null, "Erro ao buscar Pessoa\n" + e);
         }
 
         return null;
@@ -747,7 +787,7 @@ public class BD_2 {
     public static String lastLogin(Usuario u) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT data FROM LogAcessos "
-                + "WHERE userid = " + u.getidPessoa();
+            + "WHERE userid = " + u.getidPessoa();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -761,7 +801,7 @@ public class BD_2 {
                 }
             }
         } catch (Exception e) {
-             return "Erro ao recuperar data de acesso.:" + e;
+            return "Erro ao recuperar data de acesso.:" + e;
         }
         return "desconhecido. contate o desenvolvedor";
     }
@@ -775,16 +815,16 @@ public class BD_2 {
         if (p.getidPessoa() != 1) {
             Connection con = new ConnectionFactory().getConnection();
             String sql = "UPDATE Pessoa SET "
-                    + "nome = ?, "
-                    + "email = ?, "
-                    + "status = ? "
-                    + "WHERE Pessoa.id = " + p.getidPessoa();
+                + "nome = ?, "
+                + "email = ?, "
+                + "status = ? "
+                + "WHERE Pessoa.id = " + p.getidPessoa();
 
             String sql2 = "UPDATE Endereco SET "
-                    + "cep = ?, "
-                    + "numero = ?, "
-                    + "telFixo = ? "
-                    + "WHERE Endereco.codigo = " + p.getendereco().getcodigo();
+                + "cep = ?, "
+                + "numero = ?, "
+                + "telFixo = ? "
+                + "WHERE Endereco.codigo = " + p.getendereco().getcodigo();
             try {
                 con.setAutoCommit(false); // precavendo possiveis merdas aqui
                 PreparedStatement ps1 = con.prepareStatement(sql);
@@ -814,10 +854,10 @@ public class BD_2 {
                         ps2.close();
                         con.close();
                         System.out.println("Update comitado.");
-                     //   JOptionPane.showMessageDialog(null, "Update concluído");
+                        //   JOptionPane.showMessageDialog(null, "Update concluído");
                     } catch (HeadlessException | SQLException e) {
                         System.out.println("Erro ao comitar o update.: " + e);
-                      //  JOptionPane.showMessageDialog(null, "Erro ao comitar o update\n" + e);
+                        //  JOptionPane.showMessageDialog(null, "Erro ao comitar o update\n" + e);
                     }
                 } catch (HeadlessException | SQLException e) {
                     System.out.println("Erro ao tentar atualizar Endereco.: " + e);
@@ -825,10 +865,10 @@ public class BD_2 {
                 }
             } catch (HeadlessException | SQLException e) {
                 System.out.println("Erro ao tentar atualizar Pessoa.: " + e);
-               // JOptionPane.showMessageDialog(null, "Erro ao tentar atualizar pessoa\n" + e);
+                // JOptionPane.showMessageDialog(null, "Erro ao tentar atualizar pessoa\n" + e);
             }
         } else {
-           // JOptionPane.showMessageDialog(null, "você não pode modificar o usuario ROOT!!!");
+            // JOptionPane.showMessageDialog(null, "você não pode modificar o usuario ROOT!!!");
         }
     }
 
@@ -849,7 +889,7 @@ public class BD_2 {
         }
         return false;
     }
-    
+
     //Foi necessário acrescentar
     public static ArrayList LogsAcesso() {
         ArrayList<registro> ls = new ArrayList();

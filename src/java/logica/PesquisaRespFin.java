@@ -16,7 +16,7 @@ public class PesquisaRespFin implements Logica {
     public String executa(HttpServletRequest request, HttpServletResponse response) {
         int idRespFin = Integer.parseInt(request.getParameter("idRespFin"));
         HttpSession sessao = request.getSession();
-        RespFinFisico rff = new RespFinFisico();
+        RespFinFisico rff = new RespFinFisico();        
         //Verifica se o ID informado pelo usuário é diferente de 0
         if (idRespFin != 0) {            
             rff = (RespFinFisico) BD_2.getRespFin(idRespFin);
@@ -27,7 +27,9 @@ public class PesquisaRespFin implements Logica {
             }
         }else{
             sessao.setAttribute("erroRespFin", "O ID não pode ser 0");
-        }
+        }      
+        
         return "ConsultaRespFin.jsp";
+        
     }
 }

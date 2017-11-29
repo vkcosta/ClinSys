@@ -97,30 +97,31 @@
                     <td width="50px">
                         <label>Nascimento: </label>
                     </td>
-                    <td>
-                        <input class="form-control" id="disabledInput" disabled="" type="date" name="data" value="<%=responsavel.getdataNasc()%>">
-                    </td>
-                    <!--<td align="rigth">
-                        <select name="dia" pattern="^\d{2}$" title="Dia" required >
-                            <option value="" placeholder="Dia"/> </option>
-                    <% for (int k = 1; k <= 31; k++) {%>
-                    <option value="<%=k%>"/><%=k%> </option>
-                    <%}%>
-                </select> 
-                <select name="mes" pattern="^\d{2}$" title="Mês" required>
-                    <option value=""/> </option>
-                    <% for (int k = 1; k <= 12; k++) {%>
-                    <option value="<%=k%>"/><%=k%> </option>
-                    <%}%>
-                </select> 
-                <select name="ano" pattern="^\d{4}$" title="Ano" required>
-                    <option value=""/> </option>
-                    <% for (int k = 1960; k <= 2010; k++) {%>
-                    <option value="<%=k%>"/><%=k%> </option>
-                    <%}%>
-                </select>
 
-            </td>   -->                     
+                    <td align="rigth">
+                        <select name="dia" title="Dia" required >
+                            <% for (int k = 1; k <= 31; k++) {%>
+                            <% if (k == (responsavel.getdataNascDate().getMonth() + 1)) {%>
+                            <option value="<%=k%>" selected="selected"/><%=k%> </option>
+                            <%} else {%>
+                            <option value="<%=k%>"/><%=k%> </option>
+                            <%}
+                             }%>
+                        </select> 
+                        <select name="mes" pattern="^\d{2}$" title="Mês" required>
+                            <option value=""/> </option>
+                            <% for (int k = 1; k <= 12; k++) {%>
+                            <option value="<%=k%>"/><%=k%> </option>
+                            <%}%>
+                        </select> 
+                        <select name="ano" pattern="^\d{4}$" title="Ano" required>
+                            <option value=""/> </option>
+                            <% for (int k = 1960; k <= 2010; k++) {%>
+                            <option value="<%=k%>"/><%=k%> </option>
+                            <%}%>
+                        </select>
+
+                    </td>                        
                 </tr>
                 <tr>
                     <td>
@@ -226,3 +227,4 @@
         <%sessao.removeAttribute("erroRespFin");%>        
     </body>
 </html>
+

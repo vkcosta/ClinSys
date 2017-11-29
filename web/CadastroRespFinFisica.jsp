@@ -68,7 +68,7 @@
                         <td width="50px">
                             <label>*Nascimento: </label>
                         </td>
-                           
+                            
                         <td align="rigth">
                             <select name="dia" pattern="^\d{2}$" title="Dia" required >
                                 <option value="" placeholder="Dia"/> </option>
