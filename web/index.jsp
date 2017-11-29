@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 13/11/2017, 10:47:11
-    Author     : vitor.costa
+    Author     : vitor.costa (Full Stack) e Mateus Garcia (Back-end original da versão Desktop)
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
