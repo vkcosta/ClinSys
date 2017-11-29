@@ -24,21 +24,18 @@
 
 %>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Responsável Fisico</title>
-    </head>
-    <body>
-     <%if(msgSucesso != null){ %>
+<!--Alerta via JavaScript-->
+<%if(msgSucesso != null){ %>
          <script>
              var sucesso = "<%=msgSucesso%>";
              
                  alert(sucesso);
              
     </script>
-    <%}%>
+    <%}
+    sessao.removeAttribute("msgSucesso");
+    sessao.removeAttribute("msgErro");
+    %>
    
     <%if(msgErro != null){ %>
          <script>
@@ -46,6 +43,17 @@
                  alert(erro);             
         </script>
     <%}%> 
+    
+<!--Fim dos Scritps-->    
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Responsável Fisico</title>
+    </head>
+    <body>
+     
                 
        
         <c:import url="menu.jsp"/>
@@ -70,7 +78,7 @@
                         </td>
                             
                         <td align="rigth">
-                            <select name="dia" pattern="^\d{2}$" title="Dia" required >
+                            <select name="dia" pattern="^\d{2}$" title="Dia" required>
                                 <option value="" placeholder="Dia"/> </option>
                                 <% for (int k = 1; k <= 31; k++) {%>
                                 <option value="<%=k%>"/><%=k%> </option>

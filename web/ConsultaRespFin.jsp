@@ -99,8 +99,17 @@
                     </td>
 
                     <td align="rigth">
-                        <select name="dia" title="Dia" required >
+                        <select name="dia" class="form-control" id="disabledInput" disabled="">
                             <% for (int k = 1; k <= 31; k++) {%>
+                            <% if (k == (responsavel.getdataNascDate().getDay() + 1)) {%>
+                            <option value="<%=k%>" selected="selected"/><%=k%> </option>
+                            <%} else {%>
+                            <option value="<%=k%>"/><%=k%> </option>
+                            <%}
+                             }%>
+                        </select> 
+                        <select name="mes" class="form-control" id="disabledInput" disabled="">
+                            <% for (int k = 1; k <= 12; k++) {%>
                             <% if (k == (responsavel.getdataNascDate().getMonth() + 1)) {%>
                             <option value="<%=k%>" selected="selected"/><%=k%> </option>
                             <%} else {%>
@@ -108,17 +117,14 @@
                             <%}
                              }%>
                         </select> 
-                        <select name="mes" pattern="^\d{2}$" title="Mês" required>
-                            <option value=""/> </option>
-                            <% for (int k = 1; k <= 12; k++) {%>
-                            <option value="<%=k%>"/><%=k%> </option>
-                            <%}%>
-                        </select> 
-                        <select name="ano" pattern="^\d{4}$" title="Ano" required>
-                            <option value=""/> </option>
+                        <select name="ano" class="form-control" id="disabledInput" disabled="">
                             <% for (int k = 1960; k <= 2010; k++) {%>
+                            <% if (k == (responsavel.getdataNascDate().getDate() + 1)) {%>
+                            <option value="<%=k%>" selected="selected"/><%=k%> </option>
+                            <%} else {%>
                             <option value="<%=k%>"/><%=k%> </option>
-                            <%}%>
+                            <%}
+                             }%>
                         </select>
 
                     </td>                        

@@ -45,24 +45,31 @@ public class CadastraRespFinFisico implements Logica {
         //Validações dos compos do formulário
         if (nome == null) {
             sessao.setAttribute("msgErro", "Nome não pode ser vazio!");
+            return "CadastroRespFinFisica.jsp";
         }
         if (cpf == null || cpf.length() != 11) {
             sessao.setAttribute("msgErro", "CPF Inválido!");
+            return "CadastroRespFinFisica.jsp";
         }
         if (rg.length() != 9) {
             sessao.setAttribute("msgErro", "RG não pode ser vazio!");
+            return "CadastroRespFinFisica.jsp";
         }
         if (sexo == 0) {
             sessao.setAttribute("msgErro", "Sexo não pode ser vazio!");
+            return "CadastroRespFinFisica.jsp";
         }
         if (cep.length() != 8) {
             sessao.setAttribute("msgErro", "CEP Inválido!");
+            return "CadastroRespFinFisica.jsp";
         }
         if (email == null) {
             sessao.setAttribute("msgErro", "Email Inválido!");
+            return "CadastroRespFinFisica.jsp";
         }
         if (telCelular.length() == 0 && telCelular == null) {
             sessao.setAttribute("msgErro", "Telefone Celular Inválido!");
+            return "CadastroRespFinFisica.jsp";
         }
         //Cria e insere um novo Objeto do tipo endereço no banco de dados
         Endereco e = new Endereco(cep, numero, telFixo);
@@ -70,6 +77,7 @@ public class CadastraRespFinFisico implements Logica {
             BD_2.add(e);
         } catch (Exception ex) {
             sessao.setAttribute("msgErro", "Erro ao cadastrar o Endereço!");
+            return "CadastroRespFinFisica.jsp";
         }
         //Variáveis necessárias para verificar o CPF e RG já estão cadastrados        
         int verificaCPF = BD_2.getidPessoa(cpf);
