@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="Entidades.RespFinFisico"%>
 <%@page import="Entidades.Pessoa"%>
 <%@page import="Entidades.Usuario"%>
@@ -60,7 +60,7 @@
                 </td>
                 <td></td>
                 <td align="center">
-                    ID: <input type="text" id="mostraID" name="mostraID" value="" class="form-control" id="disabledInput" disabled="" style="width:22px;" required autofocus>
+                    ID: <input type="text" id="mostraID" name="mostraID" value="" class="form-control" id="disabledInput" disabled="" style="width:25px;" required autofocus>
                 </td>
                 <td>   
                     Nome: <input type="text" id="mostraRespFin" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:250px;" >

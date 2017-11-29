@@ -4,10 +4,11 @@
     Author     : vitor.costa
 --%>
 
+<%@page import="DAO.BD_2"%>
 <%@page import="Entidades.RespFinFisico"%>
 <%@page import="Entidades.Paciente"%>
 <%@page import="Entidades.Usuario"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <% Usuario user = new Usuario();
@@ -22,12 +23,22 @@
     }
 %>
 
+<script>
+    //Função javascript para 'pegar' o nome do Resp. selecionadao e exibir o Resp. ao lado.
+    function pegaRespFin() {
+        var id = document.getElementById("respFin").value;
+        var responsavel = document.getElementById("respFin").options[document.getElementById("respFin").selectedIndex].text;
+        document.getElementById("mostraID").value = id;
+        document.getElementById("mostraRespFin").value = responsavel;        
+    }
+
+</script>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Consultar Resp. Finaneiro</title>
+        <title>Consultar Resp. Financeiro</title>
     </head>
     <body>
         <!--Importação do Menu-->
@@ -35,29 +46,39 @@
         <h2>Consultar Resp. Financeiro</h2>
         <br>
         <!--Formulário para consulta do paciente-->
-        <form action="Controle">
+        <form action="Controle" method="post">
             <fieldset>
-                <legend>Consultar Responsável Financeiro</legend>
+                <legend>Dados para Consulta</legend>
                 <table cellspacing="10" >
                     <tr>
                         <td>
-                            <label for="idRespFin"> ID do Responsável Financeiro: </label>
+                            <label for="idRespFin"> Nome: </label>
                         </td>
-                        <td align="left">
-                            <input type="text" pattern="^\d{}$" title="Somente número" name="idRespFin" required autofocus >
+                        <td align="left">               
+
+                            <select id="respFin">
+                                <c:forEach var="resp" items="${listaRespFin}">
+                                    <option value="${resp.idPessoa}" selected="selected">${resp.nome}</option>
+                                </c:forEach>
+                            </select>
                         </td>
                         <td>
-                            <input type="hidden" name="logica" value="PesquisaRespFin"/>
-                            <button >Pesquisar</button> 
+                            <input type="button" onclick="pegaRespFin()" value="Selecionar">
+
                         </td>
-                    </tr>
+                        <td></td>
+                        <td align="center">
+                            ID: <input type="text" id="mostraID" name="mostraID" value="" class="form-control" id="disabledInput" disabled="" style="width:22px;" required autofocus>
+                        </td>
+                        <td>   
+                            Nome: <input type="text" id="mostraRespFin" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:250px;" >
+                        </td>
+                    </tr>            
                 </table>
-            </fieldset>           
+            </fieldset>          
         </form>
 
         <br>
-        <% responsavel = (RespFinFisico) sessao.getAttribute("rff");
-        %>
         <%if (responsavel != null) {%>
 
         <fieldset>
@@ -106,7 +127,7 @@
                             <%} else {%>
                             <option value="<%=k%>"/><%=k%> </option>
                             <%}
-                             }%>
+                                }%>
                         </select> 
                         <select name="mes" class="form-control" id="disabledInput" disabled="">
                             <% for (int k = 1; k <= 12; k++) {%>
@@ -115,7 +136,7 @@
                             <%} else {%>
                             <option value="<%=k%>"/><%=k%> </option>
                             <%}
-                             }%>
+                                }%>
                         </select> 
                         <select name="ano" class="form-control" id="disabledInput" disabled="">
                             <% for (int k = 1960; k <= 2010; k++) {%>
@@ -124,7 +145,7 @@
                             <%} else {%>
                             <option value="<%=k%>"/><%=k%> </option>
                             <%}
-                             }%>
+                                }%>
                         </select>
 
                     </td>                        

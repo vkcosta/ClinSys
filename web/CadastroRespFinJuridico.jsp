@@ -29,15 +29,15 @@
     <body>
         <c:import url="menu.jsp"/>
         <br/>
-<h2>Novo Responsável Financeiro Jurídico</h2>
-<br>
+        <h2>Novo Responsável Financeiro Jurídico</h2>
+        <br>
         <form action="Controle">
             <fieldset>
                 <legend>Dados Pessoais</legend>
                 <table cellspacing="10" >
                     <tr>
                         <td>
-                            <label for="nome">Razao Social: </label>
+                            <label for="nome">*Razão Social: </label>
                         </td>
                         <td align="left">
                             <input type="text" name="razaoSocial" placeholder="Razao Social">
@@ -47,10 +47,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <label>CNPJ:</label>
+                            <label>*CNPJ:</label>
                         </td>
                         <td align="left">
-                            <input type="text" name="cnpj" size="14" maxlength="14" placeholder="CPF">
+                            <input type="text" name="cnpj" size="14" maxlength="14" placeholder="CNPJ">
                         </td>                        
                     </tr>                    
                 </table>
@@ -63,17 +63,17 @@
                 <table cellspacing="10">        
                     <tr>
                         <td>
-                            <label for="cep">CEP: </label>
+                            <label for="cep">*CEP: </label>
                         </td>
                         <td align="left">
-                            <input type="text" name="cep" size="5" maxlength="5"> - <input type="text" name="cep2" size="3" maxlength="3">
+                            <input pattern="^\d{8}$" title="Somente números" required type="text" name="cep" size="8" maxlength="8" placeholder="CEP">
                         </td>
 
                         <td>
-                            <label for="numero">Numero:</label>
+                            <label for="numero">*Numero:</label>
                         </td>
                         <td align="left">
-                            <input type="text" name="numero" size="4" placeholder="Número">
+                            <input pattern="^\d{}$" title="Somente números" required type="text" name="numero" size="4" maxlength="7" placeholder="Número">
                         </td>
                     </tr>
                 </table>
@@ -86,25 +86,26 @@
                 <table cellspacing="10">
                     <tr>
                         <td>
-                            <label for="email">E-mail: </label>
+                            <label for="email">*E-mail: </label>
                         </td>
                         <td align="left">
-                            <input type="text" name="email" placeholder="Email">
-                        </td>
-
-                        <td>
-                            <label for="telFixo">Telefone Fixo:</label>
+                            <input type="email" name="email" placeholder="Email" required>
                         </td>
                         <td>
-                            <input type="text" name="telFixo" placeholder="Telefone Fixo">
-                        </td>                       
+                            <label for="celular">*Telefone Fixo: </label>
+                        </td>
+                        <td align="left">
+                            <input  pattern="^\d{10}$" title="Somente números" required type="text" name="telFixo" maxlength="10" placeholder="Telefone Fixo">
+                            <font size="2">Formato: DD+Número</font>
+                        </td>
                     </tr>
                 </table>
-            </fieldset>
+            </fieldset>            
+            <h5><i>* Preenchimento obrigatório</i></h5>
             <br />
             <center>
-                <input type="hidden" name="logica" value=""/>
-                <button >Cadastrar</button>
+                <input type="hidden" name="logica" value="#"/>
+                <button >Salvar</button>
                 <input type="reset" value="Limpar"></center>
         </form>
     </body>
