@@ -45,11 +45,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
-      out.write("<!--\n");
-      out.write("To change this license header, choose License Headers in Project Properties.\n");
-      out.write("To change this template file, choose Tools | Templates\n");
-      out.write("and open the template in the editor.\n");
-      out.write("-->\n");
+      out.write("\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <title>Clinsys</title>\n");
