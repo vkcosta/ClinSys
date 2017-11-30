@@ -52,7 +52,7 @@ public class BD_2 {
     public static void add(PessoaFisica p) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "INSERT INTO Pessoa (endereco,nome,email,status) "
-            + "values (?,?,?,?)";
+                + "values (?,?,?,?)";
         try {
             con.setAutoCommit(false); //precavendo possiveis merdas aqui...
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -72,8 +72,8 @@ public class BD_2 {
                 try (Connection con2 = new ConnectionFactory().getConnection()) {
                     con2.setAutoCommit(false); //Acertado aqui
                     String sql2 = "INSERT INTO PessoaFisica "
-                        + "(id, dataNasc, rg, cpf, sexo, celular) "
-                        + "values (?, ?, ?, ?, ?, ?)";
+                            + "(id, dataNasc, rg, cpf, sexo, celular) "
+                            + "values (?, ?, ?, ?, ?, ?)";
                     int id = BD_2.getidPessoa(p.getnome(), p.getemail());
                     java.sql.Date nasc = p.getdataNascDateObj();
                     String rg = p.getrg();
@@ -145,7 +145,7 @@ public class BD_2 {
             //capturo o ID gerado pelo MySQL
             int id = BD_2.getidPessoa(p.getcpf());
             try ( //informo à statement os IDs envolvidos.
-                PreparedStatement stmt = con.prepareStatement(sql)) {
+                    PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setInt(1, id);
                 //dentro do objeto p há um outro objeto pessoa q é o respfin. aqui eu capturo o seu id
                 stmt.setInt(2, p.getRespFin().getidPessoa());
@@ -166,7 +166,7 @@ public class BD_2 {
     public static void add(RespFinJuridico pj) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "INSERT INTO Pessoa (Endereco,nome,email,status) "
-            + "values (?,?,?,?)";
+                + "values (?,?,?,?)";
         try {
             con.setAutoCommit(false);
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -290,10 +290,10 @@ public class BD_2 {
     public static void update(Endereco e) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "UPDATE Endereco SET "
-            + "cep = " + e.getcep() + ", "
-            + "numero = " + e.getnumero() + ", "
-            + "telfixo = " + e.gettelFixo()
-            + " WHERE codigo = " + e.getcodigo();
+                + "cep = " + e.getcep() + ", "
+                + "numero = " + e.getnumero() + ", "
+                + "telfixo = " + e.gettelFixo()
+                + " WHERE codigo = " + e.getcodigo();
 
         try {
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -397,7 +397,7 @@ public class BD_2 {
     public static int getidPessoa(String nome, String email) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT id FROM Pessoa WHERE nome = '" + nome
-            + "' AND email = '" + email + "'";
+                + "' AND email = '" + email + "'";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -422,8 +422,8 @@ public class BD_2 {
     public static PessoaFisica getPessoaFisica(int id) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT * FROM Pessoa join PessoaFisica on "
-            + "Pessoa.id = PessoaFisica.id "
-            + "WHERE Pessoa.id = (?);";
+                + "Pessoa.id = PessoaFisica.id "
+                + "WHERE Pessoa.id = (?);";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -540,10 +540,10 @@ public class BD_2 {
         List<Pessoa> lista = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement("SELECT Pessoa.id,endereco,nome,email,status,dataNasc,rg,cpf,sexo,celular,cep,numero,telFixo\n"
-                + "    FROM Pessoa JOIN PessoaFisica\n"
-                + "        ON Pessoa.id = PessoaFisica.id JOIN RespFinFisico\n"
-                + "            ON RespFinFisico.id = Pessoa.id JOIN Endereco\n"
-                + "                ON Endereco.codigo = endereco");
+                    + "    FROM Pessoa JOIN PessoaFisica\n"
+                    + "        ON Pessoa.id = PessoaFisica.id JOIN RespFinFisico\n"
+                    + "            ON RespFinFisico.id = Pessoa.id JOIN Endereco\n"
+                    + "                ON Endereco.codigo = endereco");
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -566,12 +566,41 @@ public class BD_2 {
                 rf.setsexo(rs.getString("sexo").charAt(0));
                 rf.setstatus((rs.getInt("status") != 0));
                 lista.add(rf);
-            }
-        } catch (HeadlessException | SQLException e) {
-            System.out.println("Erro ao buscar respfin.: " + e);
-            //JOptionPane.showMessageDialog(null, "Erro ao buscar Responsáveis.\n" + e);
+            } 
+            con.close();
+            //Inicia a busca com todos os resp. fin. jurídico
+                Connection con2 = new ConnectionFactory().getConnection();
+                PreparedStatement ps2 = con2.prepareStatement("SELECT Pessoa.id,endereco,nome,email,status,cnpj,cep,numero,telFixo\n"
+                        + "    FROM Pessoa JOIN RespFinJuridico\n"
+                        + "        ON Pessoa.id = RespFinJuridico.id JOIN Endereco\n"
+                        + "            ON endereco = Endereco.codigo\n"
+                        + "    WHERE Pessoa.id = id;");
 
+                ResultSet rs2 = ps2.executeQuery();
+                while (rs2.next()) {
+                    RespFinJuridico pj = new RespFinJuridico();
+                    pj.setcnpj(rs2.getString("cnpj").toCharArray());
+                    pj.setemail(rs2.getString("email"));
+
+                    Endereco en2 = new Endereco();
+                    en2.setcep(rs2.getString("cep").toCharArray());
+                    en2.setcodigo(rs2.getInt("endereco"));
+                    en2.setnumero(rs2.getInt("numero"));
+                    en2.settelFixo(rs2.getString("telFixo").toCharArray());
+                    pj.setendereco(en2);
+
+                    pj.setidPessoa(rs2.getInt("id"));
+                    pj.setnome(rs2.getString("nome"));
+                    pj.setstatus((rs2.getInt("status") != 0));
+                    lista.add(pj);
+                }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(BD_2.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao buscar Responsável Financeiro: " + ex);
+            return null;
         }
+
         return lista;
     }
 
@@ -617,11 +646,11 @@ public class BD_2 {
     public static Usuario getUsuario(String login) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT endereco,nome,email,status,dataNasc,rg,cpf,sexo,celular,cep,numero,telFixo,login,senha,Pessoa.id as ID"
-            + "    FROM Pessoa JOIN PessoaFisica"
-            + "        ON Pessoa.id = PessoaFisica.id JOIN Usuario"
-            + "            ON Usuario.id = Pessoa.id JOIN Endereco"
-            + "                ON Endereco.codigo = endereco"
-            + "    WHERE Pessoa.id = (SELECT id FROM Usuario WHERE Usuario.login = ?)";
+                + "    FROM Pessoa JOIN PessoaFisica"
+                + "        ON Pessoa.id = PessoaFisica.id JOIN Usuario"
+                + "            ON Usuario.id = Pessoa.id JOIN Endereco"
+                + "                ON Endereco.codigo = endereco"
+                + "    WHERE Pessoa.id = (SELECT id FROM Usuario WHERE Usuario.login = ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, login);
@@ -664,7 +693,7 @@ public class BD_2 {
     public static int getCodEndereco(String cep, int num) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT codigo FROM Endereco WHERE"
-            + " cep = ? AND numero = ?";
+                + " cep = ? AND numero = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cep);
@@ -727,8 +756,8 @@ public class BD_2 {
     public static Pessoa getPessoa(int id) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT endereco,nome,email,status,cep,numero,telFixo FROM Pessoa "
-            + "JOIN Endereco ON Pessoa.endereco = Endereco.codigo "
-            + "WHERE Pessoa.id = " + id;
+                + "JOIN Endereco ON Pessoa.endereco = Endereco.codigo "
+                + "WHERE Pessoa.id = " + id;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -787,7 +816,7 @@ public class BD_2 {
     public static String lastLogin(Usuario u) {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT data FROM LogAcessos "
-            + "WHERE userid = " + u.getidPessoa();
+                + "WHERE userid = " + u.getidPessoa();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -815,16 +844,16 @@ public class BD_2 {
         if (p.getidPessoa() != 1) {
             Connection con = new ConnectionFactory().getConnection();
             String sql = "UPDATE Pessoa SET "
-                + "nome = ?, "
-                + "email = ?, "
-                + "status = ? "
-                + "WHERE Pessoa.id = " + p.getidPessoa();
+                    + "nome = ?, "
+                    + "email = ?, "
+                    + "status = ? "
+                    + "WHERE Pessoa.id = " + p.getidPessoa();
 
             String sql2 = "UPDATE Endereco SET "
-                + "cep = ?, "
-                + "numero = ?, "
-                + "telFixo = ? "
-                + "WHERE Endereco.codigo = " + p.getendereco().getcodigo();
+                    + "cep = ?, "
+                    + "numero = ?, "
+                    + "telFixo = ? "
+                    + "WHERE Endereco.codigo = " + p.getendereco().getcodigo();
             try {
                 con.setAutoCommit(false); // precavendo possiveis merdas aqui
                 PreparedStatement ps1 = con.prepareStatement(sql);
@@ -912,5 +941,4 @@ public class BD_2 {
         }
         return ls;
     }
-
 }
