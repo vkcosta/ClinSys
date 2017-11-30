@@ -68,8 +68,9 @@
                         </td>
                         <td></td>
                         <td align="center">
-                            ID: <input type="text" id="mostraID" name="mostraID"  style="width:22px;" required autofocus readonly="readonly">
+                            ID: <input type="text" id="mostraID" name="mostraID" style="width:22px;" readonly="readonly">                            
                         </td>
+                        
                         <td>   
                             Nome: <input type="text" id="mostraRespFin"  name="mostraRespFin" class="form-control" id="disabledInput" disabled="" style="width:250px;" >
                         </td>

@@ -16,9 +16,32 @@
         response.sendRedirect("index.jsp");
     }
     String login = user.getlogin();
-
+    String msgSucesso = (String)sessao.getAttribute("msgSucesso");
+    String msgErro = (String)sessao.getAttribute("msgErro");
 
 %>
+
+<!--Alerta via JavaScript-->
+<%if(msgSucesso != null){ %>
+         <script>
+             var sucesso = "<%=msgSucesso%>";
+             
+                 alert(sucesso);
+             
+    </script>
+    <%}
+    sessao.removeAttribute("msgSucesso");
+    sessao.removeAttribute("msgErro");
+    %>
+   
+    <%if(msgErro != null){ %>
+         <script>
+             var erro = "<%=msgErro%>";             
+                 alert(erro);             
+        </script>
+    <%}%> 
+    
+<!--Fim dos Scritps--> 
 
 <!DOCTYPE html>
 <html>
@@ -40,7 +63,7 @@
                             <label for="nome">*Razão Social: </label>
                         </td>
                         <td align="left">
-                            <input type="text" name="razaoSocial" placeholder="Razao Social">
+                            <input type="text" name="razaoSocial" placeholder="Razão Social" required>
                         </td>                      
 
 
@@ -50,8 +73,9 @@
                             <label>*CNPJ:</label>
                         </td>
                         <td align="left">
-                            <input type="text" name="cnpj" size="14" maxlength="14" placeholder="CNPJ">
-                        </td>                        
+                            <input type="text" name="cnpj" size="14" maxlength="14" placeholder="CNPJ" pattern="^\d{14}$" title="Somente números" required>
+                        </td> 
+                        
                     </tr>                    
                 </table>
             </fieldset>
@@ -89,7 +113,7 @@
                             <label for="email">*E-mail: </label>
                         </td>
                         <td align="left">
-                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="email" name="email" placeholder="Email" maxlength="255" required>
                         </td>
                         <td>
                             <label for="celular">*Telefone Fixo: </label>

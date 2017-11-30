@@ -14,11 +14,18 @@ public class PesquisaRespFin implements Logica {
 
     @Override
     public String executa(HttpServletRequest request, HttpServletResponse response) {
-        
-        int idRespFin = Integer.parseInt(request.getParameter("mostraID"));        
-        HttpSession sessao = request.getSession();    
+        HttpSession sessao = request.getSession();
+        String id = request.getParameter("mostraID");
         sessao.setAttribute("listaRespFin", BD_2.getAllRespFin());
-        RespFinFisico rff = new RespFinFisico();        
+        RespFinFisico rff = new RespFinFisico(); 
+        
+        if(id == ""){
+            sessao.setAttribute("erroRespFin", "Selecione um Responsável Financeiro!");
+            return "ConsultaRespFin.jsp"; 
+        }
+        int idRespFin = Integer.parseInt(id);        
+            
+               
         //Verifica se o ID informado pelo usuário é diferente de 0
        
         if (idRespFin != 0) {            
@@ -29,7 +36,8 @@ public class PesquisaRespFin implements Logica {
                 sessao.setAttribute("erroRespFin", "Responsável Financeiro não Cadastrado!");
             }
         }else{
-            sessao.setAttribute("erroRespFin", "O ID não pode ser 0");
+            sessao.setAttribute("erroRespFin", "Selecione um Responsável Financeiro!");
+            return "ConsultaRespFin.jsp";            
         }      
         
         return "ConsultaRespFin.jsp";
