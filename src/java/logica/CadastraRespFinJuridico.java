@@ -72,7 +72,9 @@ public class CadastraRespFinJuridico implements Logica {
         //Pegar o código do endereço cadastrado anteriormente
         e.setcodigo(BD_2.getCodEndereco(new String(e.getcep()), e.getnumero()));
         rfj.setendereco(e);
+        rfj.setnome(razaoSocial);
         rfj.setemail(email);
+        rfj.setstatus(true);
         rfj.setcnpj(cnpj);
         BD_2.add(rfj);
         sessao.setAttribute("msgSucesso", "Cadastro Responsável Jurídico Realizado com Sucesso!");
