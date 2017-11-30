@@ -522,13 +522,13 @@ public class BD_2 {
                     con.close();
                     return pj;
                 } else {
-                    //System.out.println("O ID informado não pertence a nenhum responsável Financeiro");
+                    System.out.println("O ID informado não pertence a nenhum responsável Financeiro");
                     //JOptionPane.showMessageDialog(null, "O ID informado não pertence a nenhum responsável Financeiro");
                     return null;
                 }
             }
         } catch (HeadlessException | SQLException e) {
-            //System.out.println("Erro ao buscar respfin.: " + e);
+            System.out.println("Erro ao buscar respfin.: " + e);
             //JOptionPane.showMessageDialog(null, "Erro ao buscar Responsáveis.\n" + e);
 
         }
@@ -573,8 +573,7 @@ public class BD_2 {
                 PreparedStatement ps2 = con2.prepareStatement("SELECT Pessoa.id,endereco,nome,email,status,cnpj,cep,numero,telFixo\n"
                         + "    FROM Pessoa JOIN RespFinJuridico\n"
                         + "        ON Pessoa.id = RespFinJuridico.id JOIN Endereco\n"
-                        + "            ON endereco = Endereco.codigo\n"
-                        + "    WHERE Pessoa.id = id;");
+                        + "            ON endereco = Endereco.codigo\n");
 
                 ResultSet rs2 = ps2.executeQuery();
                 while (rs2.next()) {
