@@ -202,7 +202,7 @@
     <h5><i>* Preenchimento obrigatório</i></h5>
     <br />
     <center>
-        <input type="hidden" name="logica" value="CadastraRespFinFisico"/>
+        <input type="hidden" name="logica" value="CadastraPaciente"/>
         <button >Salvar</button>
         <input type="reset" value="Limpar"></center>
 </form>

@@ -127,9 +127,7 @@
             </fieldset>            
             <h5><i>* Preenchimento obrigatório</i></h5>
             <br />
-            <center>
-
-                <input type="hidden" name="logica" value=""/>
+            <center>         
 
                 <input type="hidden" name="logica" value="CadastraRespFinJuridico"/>
 

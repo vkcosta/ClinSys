@@ -96,6 +96,7 @@ public class BD_2 {
             } catch (SQLException ex) {
                 System.out.println("Erro ao registrar na tabela pessoaFisica.: " + ex);
                 //JOptionPane.showMessageDialog(null, "Erro ao registrar na tabela pessoaFisica\n" + ex);
+             
             }
 
         } catch (HeadlessException | SQLException ex) {

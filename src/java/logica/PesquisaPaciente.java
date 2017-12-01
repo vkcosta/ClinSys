@@ -7,6 +7,7 @@ package logica;
 
 import DAO.BD_2;
 import Entidades.Paciente;
+import Entidades.Pessoa;
 import Entidades.RespFinFisico;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,8 +35,9 @@ public class PesquisaPaciente implements Logica{
                
         //Verifica se o ID informado pelo usuário é diferente de 0
        
-        if (idPaciente != 0) {            
-            pa = (Paciente) BD_2.getRespFin(idPaciente);
+        if (idPaciente != 0) {      
+            pa = BD_2.getPaciente(idPaciente);
+            pa.setRespFin((Pessoa)BD_2.getRespFin(idPaciente));
             if (pa != null) { //Verifica se existe um Responsável financeior físico cadastrado no BD.
                 sessao.setAttribute("pa", pa);
             } else {

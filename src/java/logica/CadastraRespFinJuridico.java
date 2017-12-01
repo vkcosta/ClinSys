@@ -2,6 +2,7 @@ package logica;
 
 import DAO.BD_2;
 import Entidades.Endereco;
+import Entidades.Pessoa;
 import Entidades.PessoaFisica;
 import Entidades.RespFinJuridico;
 import javax.servlet.http.HttpServletRequest;
@@ -58,16 +59,17 @@ public class CadastraRespFinJuridico implements Logica {
             sessao.setAttribute("msgErro", "Erro ao cadastrar o Endereço!");
             return "CadastroRespFinJuridico.jsp";
         }
-        /*
-        //Variáveis necessárias para verificar o CPF e RG já estão cadastrados        
-        int verificaCPF = BD_2.getidPessoa(cpf);
-        PessoaFisica pf = BD_2.getPessoaFisica(verificaCPF);
+        
+        //Variáveis necessárias para verificar o CNPJ já está cadastrado        
+        String cnpj2 = (String)sessao.getAttribute("cnpj");
+        Pessoa verificaCnpj = BD_2.getpj(cnpj2);
+                
         //Verifica se o CPF informado já existe no banco de dados
-        if (verificaCPF != 0) {
-            sessao.setAttribute("msgErro", "Já existe um cadastro com esse CPF!");
-            return "CadastroRespFinFisica.jsp";
+        if (verificaCnpj == null) {
+            sessao.setAttribute("msgErro", "Já existe um cadastro com esse CNPJ!");
+            return "CadastroRespFinJuridico.jsp";
         }
-         */
+         
 
         //Pegar o código do endereço cadastrado anteriormente
         e.setcodigo(BD_2.getCodEndereco(new String(e.getcep()), e.getnumero()));

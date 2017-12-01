@@ -30,6 +30,7 @@ public class CadastraPaciente implements Logica {
         HttpSession sessao = request.getSession();
         Paciente p = new Paciente();
         Date dataNasc = new Date();
+        RespFinFisico rff= new RespFinFisico();
 
         //Recupeção dos dados digitados no formulário
         int id = Integer.parseInt(request.getParameter("mostraID"));
@@ -38,7 +39,7 @@ public class CadastraPaciente implements Logica {
         //Validação do ID do Resp. Financeiro
         if (id != 0) {
             //Recupera o Resp. Fin selecionado
-            RespFinFisico rff = (RespFinFisico) BD_2.getRespFin(id);
+             rff = (RespFinFisico) BD_2.getRespFin(id);
             if (rff != null) {
                 if (rff instanceof RespFinFisico) {
                     
@@ -110,7 +111,13 @@ public class CadastraPaciente implements Logica {
             return "NovoPaciente.jsp";
         }
         //Cria e insere um novo Objeto do tipo endereço no banco de dados
-        Endereco e = new Endereco(cep, numero, telFixo);
+        Endereco e = new Endereco();
+        if(telCelular == null){
+            e = new Endereco(cep, numero, null);
+        }else{
+            e = new Endereco(cep, numero, telFixo);
+        }
+        
         try {
             BD_2.add(e);
         } catch (Exception ex) {
@@ -121,6 +128,17 @@ public class CadastraPaciente implements Logica {
         //Pegar o código do endereço cadastrado anteriormente
         e.setcodigo(BD_2.getCodEndereco(new String(e.getcep()), e.getnumero()));
 
+        p.setRespFin(rff);
+        p.setnome(nome);
+        p.setdataNasc(dataNasc);
+        p.setcpf(cpf);
+        p.setrg(rg);
+        p.setsexo(sexo);
+        p.setendereco(e);
+        p.setemail(email);
+        p.setcelular(telCelular);
+        BD_2.add(p);
+        
         sessao.setAttribute("msgSucesso", "Cadastro Realizado com Sucesso!");
         return "NovoPaciente.jsp";
         
