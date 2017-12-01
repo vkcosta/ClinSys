@@ -18,7 +18,7 @@ public class Logoff implements Logica{
     @Override
     public String executa(HttpServletRequest request, HttpServletResponse response) {
         HttpSession sessao = request.getSession();
-        sessao.setAttribute("erro", "");
+        sessao.removeAttribute("mensagem");        
         sessao = null;
         return "index.jsp"; 
     }
