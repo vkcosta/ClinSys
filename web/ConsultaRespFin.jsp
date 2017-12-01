@@ -79,8 +79,8 @@
             </fieldset>  
             <br />
             <center>
-                <input type="hidden" name="logica" value="PesquisaRespFin"/>
-                <button >Visualizar</button>
+                <input type="hidden" name="logica" value="PesquisaPaciente"/>
+                <button >Exibir Dados</button>
         </center>
         </form>
 

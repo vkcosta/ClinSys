@@ -128,11 +128,11 @@
             <h5><i>* Preenchimento obrigatório</i></h5>
             <br />
             <center>
-<<<<<<< HEAD
+
                 <input type="hidden" name="logica" value=""/>
-=======
+
                 <input type="hidden" name="logica" value="CadastraRespFinJuridico"/>
->>>>>>> rfj
+
                 <button >Salvar</button>
                 <input type="reset" value="Limpar"></center>
         </form>

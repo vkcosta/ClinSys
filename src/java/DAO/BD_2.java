@@ -566,34 +566,34 @@ public class BD_2 {
                 rf.setsexo(rs.getString("sexo").charAt(0));
                 rf.setstatus((rs.getInt("status") != 0));
                 lista.add(rf);
-            } 
+            }
             con.close();
             //Inicia a busca com todos os resp. fin. jurídico
-                Connection con2 = new ConnectionFactory().getConnection();
-                PreparedStatement ps2 = con2.prepareStatement("SELECT Pessoa.id,endereco,nome,email,status,cnpj,cep,numero,telFixo\n"
-                        + "    FROM Pessoa JOIN RespFinJuridico\n"
-                        + "        ON Pessoa.id = RespFinJuridico.id JOIN Endereco\n"
-                        + "            ON endereco = Endereco.codigo\n");
+            Connection con2 = new ConnectionFactory().getConnection();
+            PreparedStatement ps2 = con2.prepareStatement("SELECT Pessoa.id,endereco,nome,email,status,cnpj,cep,numero,telFixo\n"
+                    + "    FROM Pessoa JOIN RespFinJuridico\n"
+                    + "        ON Pessoa.id = RespFinJuridico.id JOIN Endereco\n"
+                    + "            ON endereco = Endereco.codigo\n");
 
-                ResultSet rs2 = ps2.executeQuery();
-                while (rs2.next()) {
-                    RespFinJuridico pj = new RespFinJuridico();
-                    pj.setcnpj(rs2.getString("cnpj").toCharArray());
-                    pj.setemail(rs2.getString("email"));
+            ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                RespFinJuridico pj = new RespFinJuridico();
+                pj.setcnpj(rs2.getString("cnpj").toCharArray());
+                pj.setemail(rs2.getString("email"));
 
-                    Endereco en2 = new Endereco();
-                    en2.setcep(rs2.getString("cep").toCharArray());
-                    en2.setcodigo(rs2.getInt("endereco"));
-                    en2.setnumero(rs2.getInt("numero"));
-                    en2.settelFixo(rs2.getString("telFixo").toCharArray());
-                    pj.setendereco(en2);
+                Endereco en2 = new Endereco();
+                en2.setcep(rs2.getString("cep").toCharArray());
+                en2.setcodigo(rs2.getInt("endereco"));
+                en2.setnumero(rs2.getInt("numero"));
+                en2.settelFixo(rs2.getString("telFixo").toCharArray());
+                pj.setendereco(en2);
 
-                    pj.setidPessoa(rs2.getInt("id"));
-                    pj.setnome(rs2.getString("nome"));
-                    pj.setstatus((rs2.getInt("status") != 0));
-                    lista.add(pj);
-                }
-            
+                pj.setidPessoa(rs2.getInt("id"));
+                pj.setnome(rs2.getString("nome"));
+                pj.setstatus((rs2.getInt("status") != 0));
+                lista.add(pj);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(BD_2.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Erro ao buscar Responsável Financeiro: " + ex);
@@ -749,6 +749,31 @@ public class BD_2 {
             //JOptionPane.showMessageDialog(null, "ID não existe no banco de dados");
         }
         return null;
+    }
+
+    //Método que retorna todos o pacientes cadastrados
+    public static List<Paciente> getAllPaciente() {
+        Connection con = new ConnectionFactory().getConnection();
+        List<Paciente> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Pessoa \n"
+                + "JOIN PessoaFisica ON Pessoa.id = PessoaFisica.id\n"
+                + "JOIN Paciente ON Paciente.id = Pessoa.id";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                PessoaFisica pf = BD_2.getPessoaFisica(rs.getInt("id"));
+                Paciente pa = new Paciente(pf);
+                Pessoa respfin = BD_2.getRespFin(rs.getInt("respfin"));
+                pa.setRespFin(respfin);
+                lista.add(pa);            
+            }
+        } catch (SQLException e) {
+            System.out.println("Nenhum Paciente Encontrado.: " + e);
+            //JOptionPane.showMessageDialog(null, "Erro ao buscar Paciente\n" + e);
+            return null;
+        }
+        return lista;
     }
 
     //CAPTURA UMA PESSOA PELO ID - teste ok

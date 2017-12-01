@@ -63,7 +63,7 @@
                     ID: <input type="text" id="mostraID" name="mostraID" value="" class="form-control" id="disabledInput" disabled="" style="width:25px;" required autofocus>
                 </td>
                 <td>   
-                    Nome: <input type="text" id="mostraRespFin" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:250px;" >
+                    Nome: <input type="text" id="mostraRespFin" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:300px;" >
                 </td>
             </tr>            
         </table>
