@@ -76,8 +76,7 @@
                 <input type="hidden" name="logica" value="PesquisaPaciente"/>
                 <button >Exibir Dados</button>
             </center>
-        </form> 
-
+        </form>         
         <!-- Recupera o Paciente da sessão -->
         <% p = (Paciente) sessao.getAttribute("pa"); %>
 
@@ -85,7 +84,7 @@
 
         <!--Dados do Rersp. Financeiro-->
         <fieldset>
-            <legend>responsável Financeiro</legend>
+            <legend>Responsável Financeiro</legend>
             <table cellspacing="10" >
                 <tr>
                     <td>
@@ -104,6 +103,7 @@
                 </tr>
             </table>
         </fieldset>
+                    <br>
         <!--Dados do Pessoais-->      
         <fieldset>
             <legend>Dados Pessoais</legend>

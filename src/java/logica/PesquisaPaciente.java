@@ -23,7 +23,7 @@ public class PesquisaPaciente implements Logica{
     public String executa(HttpServletRequest request, HttpServletResponse response) {
         HttpSession sessao = request.getSession();
         String id = request.getParameter("mostraID");
-        sessao.setAttribute("listaRespFin", BD_2.getAllPaciente());
+        sessao.setAttribute("listaPaciente", BD_2.getAllPaciente());
         Paciente pa = new Paciente(); 
         
         if(id == ""){

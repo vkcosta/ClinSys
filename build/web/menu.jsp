@@ -42,7 +42,7 @@
                     </ul>
                 </li>
                 <li><a href="#">Ativar/ Inativar Cadastros</a></li>
-                <li><a href="#">Alterar senha de acesso</a></li>
+                <li><a href="Controle?logica=AbreAlteraSenha">Alterar Senha de Acesso</a></li>
                 <!--<li><a href="#">Visualizar todos os cadastros</a></li>-->
             </ul>                   
         </li>
