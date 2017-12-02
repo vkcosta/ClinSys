@@ -777,6 +777,30 @@ public class BD_2 {
         return lista;
     }
 
+    //método para recuperar todas as pessoas cadastradas
+    
+    public static List<Pessoa> getAllPessoa(){
+        Connection con = new ConnectionFactory().getConnection();
+        List<Pessoa> lista = new ArrayList<>();
+        String sql = "SELECT id,nome,status FROM Pessoa";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pessoa p = new Pessoa();  
+                p.setidPessoa(rs.getInt("id"));
+                p.setnome(rs.getString("nome"));
+                p.setstatus((rs.getInt("status") != 0));
+                lista.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Nenhum Cadastro Encontrado.: " + e);
+            //JOptionPane.showMessageDialog(null, "Erro ao buscar Paciente\n" + e);
+            return null;
+        }
+        return lista;
+    }
+    
     //CAPTURA UMA PESSOA PELO ID - teste ok
     public static Pessoa getPessoa(int id) {
         Connection con = new ConnectionFactory().getConnection();
