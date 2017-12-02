@@ -4,6 +4,8 @@
     Author     : vito_
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Entidades.Pessoa"%>
 <%-- 
     Document   : AlteraSenha
     Created on : 01/12/2017, 17:17:29
@@ -15,6 +17,7 @@
 <%
     HttpSession sessao = request.getSession();
     String resposta = (String) sessao.getAttribute("resposta");
+    List<Pessoa> lista = (List) sessao.getAttribute("ListaPessoa");
 %>
 
 <%if (resposta != null) {%>
@@ -29,7 +32,7 @@
     function pegaCadastro() {
         var id = document.getElementById("respFin").value;
         var responsavel = document.getElementById("respFin").options[document.getElementById("respFin").selectedIndex].text;
-        
+
         document.getElementById("mostraID").value = id;
         document.getElementById("mostraRespFin").value = responsavel;
     }
@@ -56,35 +59,15 @@
             <fieldset>
                 <legend>Dados Cadastrados</legend>
                 <table cellspacing="10">        
-                    <tr>
-                    <select id="listaCadastro">
-                        <c:forEach var="resp" items="${listaPessoa}">
-                            <option value="${resp.idPessoa}" selected="selected">${resp.nome}</option>
-                        </c:forEach>
-                    </select>
-                    <td>
-                        <input type="button" onclick="pegaCadastro()" value="Selecionar">
-                    </td>
-                    <td></td>
-                    <td align="center">
-                        ID: <input type="text" id="id" name="mostraID" value="" class="form-control" id="disabledInput" disabled="" style="width:25px;" required autofocus>
-                    </td>
-                    <td>   
-                        Nome: <input type="text" id="nome" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:300px;" >
-                    </td>
-                    <td>
-                        Status <td align="left">
-                        <select class="form-control" id="disabledInput" disabled="" name="status"  value="${ListaPessoa.status}">
-                            
-                            <option value="1">Ativo</option> 
-                            
-                            <option value="0">Inativo</option>                              
-                            
-                        </select>
-                    </td>
-                    </td>
 
+                    <% for (int k = 0; k < lista.size(); k++) { %>
+                    <tr>
+                        <td>
+                            
+                        </td>
                     </tr>
+                    <%}%>
+
                 </table>
             </fieldset>
             <br>

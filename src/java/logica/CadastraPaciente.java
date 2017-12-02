@@ -31,22 +31,18 @@ public class CadastraPaciente implements Logica {
         Paciente p = new Paciente();
         Date dataNasc = new Date();
         RespFinFisico rff= new RespFinFisico();
+        request.setAttribute("listaRespFin", BD_2.getAllRespFin());
 
         //Recupeção dos dados digitados no formulário
         int id = Integer.parseInt(request.getParameter("mostraID"));
-        String nomeResp = request.getParameter("mostraRespFin");
+        
         
         //Validação do ID do Resp. Financeiro
         if (id != 0) {
             //Recupera o Resp. Fin selecionado
-             rff = (RespFinFisico) BD_2.getRespFin(id);
-            if (rff != null) {
-                if (rff instanceof RespFinFisico) {
-                    
-                }
-            }
+             rff = (RespFinFisico) BD_2.getRespFin(id);            
         } else {
-            sessao.setAttribute("erroID", "Selecione um Responsável Financeiro");
+            sessao.setAttribute("msgErro", "Selecione um Responsável Financeiro");
             return "NovoPaciente.jsp";
 
         }
@@ -68,7 +64,7 @@ public class CadastraPaciente implements Logica {
             dataNasc = PessoaFisica.FormatarData(data);
         } catch (ParseException ex) {
             Logger.getLogger(CadastraRespFinFisico.class.getName()).log(Level.SEVERE, null, ex);
-            sessao.setAttribute("erro", "Erro ao selecionar a Data de Nascimento!");
+            sessao.setAttribute("msgErro", "Erro ao selecionar a Data de Nascimento!");
             return "NovoPaciente.jsp";
         }
         //Validações dos compos do formulário        
@@ -112,7 +108,7 @@ public class CadastraPaciente implements Logica {
         }
         //Cria e insere um novo Objeto do tipo endereço no banco de dados
         Endereco e = new Endereco();
-        if(telCelular == null){
+        if(telFixo == null){
             e = new Endereco(cep, numero, null);
         }else{
             e = new Endereco(cep, numero, telFixo);

@@ -12,7 +12,7 @@
     }
     String login = user.getlogin();
 
-    String msg = (String) sessao.getAttribute("erroID");
+    String msg = (String) sessao.getAttribute("msgErro");
 %>
 
 <!--Alerta via JavaScript-->
@@ -22,7 +22,7 @@
     alert(sucesso);
 </script>
 <%}
-    sessao.removeAttribute("erroID");
+    sessao.removeAttribute("msgErro");
 %>
 
 <script>
@@ -38,7 +38,7 @@
 </script>
 <!--Fim dos Scritps--> 
 
-<form action="Controle" method="post">
+<form action="Controle" method="get">
     <fieldset>
         <legend>Responsável Financeiro</legend>
         <table cellspacing="10" >
@@ -60,7 +60,7 @@
                 </td>
                 <td></td>
                 <td align="center">
-                    ID: <input type="text" id="mostraID" name="mostraID" value="" class="form-control" id="disabledInput" disabled="" style="width:25px;" required autofocus>
+                    ID: <input type="text" id="mostraID" name="mostraID" value=""  style="width:25px;" required autofocus readonly="readonly">
                 </td>
                 <td>   
                     Nome: <input type="text" id="mostraRespFin" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:300px;" >
@@ -186,14 +186,14 @@
                     <label for="telFixo">Telefone Fixo:</label>
                 </td>
                 <td>
-                    <input type="text" name="telFixo" placeholder="Telefone Fixo">                            
+                    <input  pattern="^\d{10}$" title="O campo deve conter 10 números" type="text" name="telFixo" maxlength="11" placeholder="Telefone Fixo">                            
                 </td>
 
                 <td>
                     <label for="celular">*Telefone Celular: </label>
                 </td>
                 <td align="left">
-                    <input  pattern="^\d{11}$" title="Somente números" required type="text" name="telCelular" maxlength="11" placeholder="Celular">
+                    <input  pattern="^\d{11}$" title="O campo deve conter 11 números" required type="text" name="telCelular" maxlength="11" placeholder="Celular">
                     <font size="2">Formato: DD+Número</font>
                 </td>
             </tr>
