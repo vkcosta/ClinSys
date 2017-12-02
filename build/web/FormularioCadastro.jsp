@@ -186,7 +186,7 @@
                     <label for="telFixo">Telefone Fixo:</label>
                 </td>
                 <td>
-                    <input  pattern="^\d{10}$" title="O campo deve conter 10 números" type="text" name="telFixo" maxlength="11" placeholder="Telefone Fixo">                            
+                    <input  pattern="^\d{10}$" title="O campo deve conter 10 números" type="text" name="telFixo" maxlength="10" placeholder="Telefone Fixo">                            
                 </td>
 
                 <td>
