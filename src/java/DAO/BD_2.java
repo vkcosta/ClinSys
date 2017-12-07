@@ -780,7 +780,7 @@ public class BD_2 {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                PessoaFisica pf = BD_2.getPessoaFisica(rs.getInt("id"));
+               PessoaFisica pf = BD_2.getPessoaFisica(rs.getInt("id"));
                 Paciente pa = new Paciente(pf);
                 Pessoa respfin = BD_2.getRespFin(rs.getInt("respfin"));
                 pa.setRespFin(respfin);

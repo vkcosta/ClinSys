@@ -7,8 +7,7 @@ package logica;
 
 import DAO.BD_2;
 import Entidades.Paciente;
-import Entidades.Pessoa;
-import Entidades.RespFinFisico;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,39 +16,41 @@ import javax.servlet.http.HttpSession;
  *
  * @author aluno
  */
-public class PesquisaPaciente implements Logica{
+public class PesquisaPaciente implements Logica {
 
     @Override
     public String executa(HttpServletRequest request, HttpServletResponse response) {
         HttpSession sessao = request.getSession();
         String id = request.getParameter("mostraID");
-        sessao.setAttribute("listaPaciente", BD_2.getAllPaciente());
-        Paciente pa = new Paciente(); 
-        
-        if(id == ""){
+        List paciente = BD_2.getAllPaciente();
+        sessao.setAttribute("listaPaciente", paciente);
+        Paciente pa = new Paciente();
+
+        if (id.equals("")) {
             sessao.setAttribute("erroPaciente", "Selecione um Paciente!");
-            return "ConsultaCadastroPaciente.jsp"; 
+            return "ConsultaCadastroPaciente.jsp";
         }
-        int idPaciente = Integer.parseInt(id);        
-            
-               
+        int idPaciente = Integer.parseInt(id);
+
         //Verifica se o ID informado pelo usuário é diferente de 0
-       
-        if (idPaciente != 0) {      
-            pa = BD_2.getPaciente(idPaciente);
-            
-            if (pa != null) { //Verifica se existe um Responsável financeior físico cadastrado no BD.
-                //pa.setRespFin((Pessoa)BD_2.getRespFin(idPaciente));
-                sessao.setAttribute("pa", pa);
-            } else {
-                sessao.setAttribute("erroPaciente", "Paciente não Cadastrado!");
-            }
-        }else{
+        if (idPaciente != 0) {
+            //Verificar se o paciente selecionado existe
+            for (int k = 0; k < paciente.size(); k++) {
+                pa = (Paciente) paciente.get(k);
+                if (pa != null) {
+                    if (pa.getidPessoa() == idPaciente) {
+                        sessao.setAttribute("pa", pa);
+                        return "ConsultaCadastroPaciente.jsp";
+                    }
+                }
+            } 
+
+        } else {
             sessao.setAttribute("erroPaciente", "Selecione um Paciente!");
-            return "ConsultaCadastroPaciente.jsp";            
-        }      
-        
+            
+        }
+
         return "ConsultaCadastroPaciente.jsp";
     }
-    
+
 }
