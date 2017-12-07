@@ -41,7 +41,7 @@
                         <li><a href="Controle?logica=AbreCadastroRespFinJuridico">Jurídico</a></li>
                     </ul>
                 </li>
-                <li><a href="Controle?logica=AbreAlteraCadastro">Ativar/ Inativar Cadastros</a></li>
+                <li><a href="#">Ativar/ Inativar Cadastros</a></li>
                 <li><a href="Controle?logica=AbreAlteraSenha">Alterar Senha de Acesso</a></li>
                 <!--<li><a href="#">Visualizar todos os cadastros</a></li>-->
             </ul>                   

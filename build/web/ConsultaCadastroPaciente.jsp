@@ -78,7 +78,7 @@
             </center>
         </form>         
         <!-- Recupera o Paciente da sessão -->
-        <% p = (Paciente) sessao.getAttribute("pa"); %>
+        <% p = (Paciente)sessao.getAttribute("pa"); %>
 
         <% if (p != null) {%>
 
@@ -227,15 +227,19 @@
                         <label for="telFixo">Telefone Fixo:</label>
                     </td>
                     <td>
+                        <% if(p.getendereco().gettelFixo().equals("")){ %>
+                        <input type="text" name="telFixo" placeholder="Telefone Fixo" value=""> 
+                        <%}else{%>
                         <input type="text" name="telFixo" placeholder="Telefone Fixo" value="<%=p.getendereco().gettelFixo()%>">                            
+                        <%}%>
                     </td>
 
                     <td>
-                        <label for="celular">*Telefone Celular: </label>
+                        <label for="celular">Telefone Celular: </label>
                     </td>
                     <td align="left">
-                        <input  pattern="^\d{11}$" title="Somente números" required type="text" name="telCelular" maxlength="11" placeholder="Celular">
-                        <font size="2">Formato: DD+Número</font>
+                        <input type="text" name="telCelular" placeholder="Celular" value="<%=p.getcelular() %>">
+                        
                     </td>
                 </tr>
             </table>

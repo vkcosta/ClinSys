@@ -37,8 +37,9 @@ public class PesquisaPaciente implements Logica{
        
         if (idPaciente != 0) {      
             pa = BD_2.getPaciente(idPaciente);
-            pa.setRespFin((Pessoa)BD_2.getRespFin(idPaciente));
+            
             if (pa != null) { //Verifica se existe um Responsável financeior físico cadastrado no BD.
+                //pa.setRespFin((Pessoa)BD_2.getRespFin(idPaciente));
                 sessao.setAttribute("pa", pa);
             } else {
                 sessao.setAttribute("erroPaciente", "Paciente não Cadastrado!");

@@ -393,6 +393,23 @@ public class BD_2 {
             return 0;
         }
     }
+    
+    //Verifica no banco se existe uma pessoa com o RG informado
+    public static boolean getPessoa(String rg) {
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT id FROM PessoaFisica WHERE rg = " + rg;
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                return true;
+            } else {               
+                return false;
+            }
+        } catch (HeadlessException | SQLException ex) {
+            return false;
+        }
+    }
 
     //CAPTURAR UMA ID DE PESSOA PELO SEU NOME E EMAIL
     public static int getidPessoa(String nome, String email) {
@@ -734,7 +751,7 @@ public class BD_2 {
 
         } catch (SQLException e) {
             //System.out.println("Erro ao buscar Paciente.: " + e);
-            //JOptionPane.showMessageDialog(null, "Erro ao buscar Paciente\n" + e);
+            //JOptionPane.showgMessageDialog(null, "Erro ao buscar Paciente\n" + e);
         }
         return null;
     }

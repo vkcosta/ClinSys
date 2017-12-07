@@ -8,8 +8,10 @@ package logica;
 import DAO.BD_2;
 import Entidades.Endereco;
 import Entidades.Paciente;
+import Entidades.Pessoa;
 import Entidades.PessoaFisica;
 import Entidades.RespFinFisico;
+import Entidades.RespFinJuridico;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.logging.Level;
@@ -30,17 +32,28 @@ public class CadastraPaciente implements Logica {
         HttpSession sessao = request.getSession();
         Paciente p = new Paciente();
         Date dataNasc = new Date();
-        RespFinFisico rff= new RespFinFisico();
+        Pessoa responsavel;
         request.setAttribute("listaRespFin", BD_2.getAllRespFin());
 
         //Recupeção dos dados digitados no formulário
         int id = Integer.parseInt(request.getParameter("mostraID"));
-        
-        
+
         //Validação do ID do Resp. Financeiro
         if (id != 0) {
             //Recupera o Resp. Fin selecionado
-             rff = (RespFinFisico) BD_2.getRespFin(id);            
+            Pessoa identificador = BD_2.getRespFin(id);
+            if (identificador != null) {
+                if (identificador instanceof RespFinFisico) {
+                    responsavel = new RespFinFisico();
+                    responsavel = identificador;
+                } else {
+                    responsavel = new RespFinJuridico();
+                    responsavel = identificador;
+                }
+            } else {
+                sessao.setAttribute("msgErro", "Erro ao selecionar o Responsável Financeiro!");
+                return "NovoPaciente.jsp";
+            }
         } else {
             sessao.setAttribute("msgErro", "Selecione um Responsável Financeiro");
             return "NovoPaciente.jsp";
@@ -108,12 +121,12 @@ public class CadastraPaciente implements Logica {
         }
         //Cria e insere um novo Objeto do tipo endereço no banco de dados
         Endereco e = new Endereco();
-        if(telFixo == null){
+        if (telFixo.equals("")) {
             e = new Endereco(cep, numero, null);
-        }else{
+        } else {
             e = new Endereco(cep, numero, telFixo);
         }
-        
+
         try {
             BD_2.add(e);
         } catch (Exception ex) {
@@ -124,7 +137,7 @@ public class CadastraPaciente implements Logica {
         //Pegar o código do endereço cadastrado anteriormente
         e.setcodigo(BD_2.getCodEndereco(new String(e.getcep()), e.getnumero()));
 
-        p.setRespFin(rff);
+        p.setRespFin(responsavel);
         p.setnome(nome);
         p.setdataNasc(dataNasc);
         p.setcpf(cpf);
@@ -134,10 +147,9 @@ public class CadastraPaciente implements Logica {
         p.setemail(email);
         p.setcelular(telCelular);
         BD_2.add(p);
-        
+
         sessao.setAttribute("msgSucesso", "Cadastro Realizado com Sucesso!");
         return "NovoPaciente.jsp";
-        
-        
+
     }
 }

@@ -12,18 +12,30 @@
     }
     String login = user.getlogin();
 
-    String msg = (String) sessao.getAttribute("msgErro");
+    String msgErro = (String) sessao.getAttribute("msgErro");
+    String msgSucesso = (String) sessao.getAttribute("msgSucesso");
 %>
 
 <!--Alerta via JavaScript-->
-<%if (msg != null) {%>
+<%if (msgErro != null) {%>
 <script>
-    var sucesso = "<%=msg%>";
+    var sucesso = "<%=msgErro%>";
     alert(sucesso);
 </script>
 <%}
     sessao.removeAttribute("msgErro");
 %>
+
+
+<%if (msgSucesso != null) {%>
+<script>
+    var sucesso = "<%=msgSucesso%>";
+    alert(sucesso);
+</script>
+<%}
+    sessao.removeAttribute("msgSucesso");
+%>
+
 
 <script>
     //Função javascript para 'pegar' o nome do Resp. selecionadao e exibir o Resp. ao lado.

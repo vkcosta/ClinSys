@@ -32,25 +32,30 @@
     <body>
         <!--Importa a página do menu-->
         <c:import url="menu.jsp"/>
-
         
-        <p><strong>Logar:</strong></p><br>
-O usuario deve inserir o Login e Senha nos campos indicados e clicar no botão LOGIN.
-
-<p><strong>Criar Responsavel financeiro:</strong></p><br>
-Para realizar um novo cadastro de Responsável, Menu Cadastros -> Responsavel Financeiro -> Escolha entre Físico ou jurídica
-Preencha o formulário e clique em Salvar.
-
-<p><strong>Criar Paciente:</strong></p><br>
-
-Para realizar um novo cadastro de Paciente, Menu Cadastros -> Novo Paciente -> Primeiro pesquise o Resposável Financeiro.
-Após, preencha o formulario e clique em Salvar.
-
-<p><strong>Ativa\Reativar cadastro:</strong></p><br>
-Para realizar uma Ativação\Inativação de um Cadastro, Menu Cadastros -> Ativar\Inativar Cadastros -> Digite o ID e clique em OK.
-
-<p><strong>SAIR:</strong></p><br>
-No Menu haverá uma opção com o seu login -> clique Sair.
-   
-</body>
+        <br>
+        <h2>Ajuda</h2>
+        <br>
+        <p><strong>Logar:</strong><br>
+            O usuario deve inserir o Login e Senha nos campos indicados e clicar no botão LOGIN.
+        </p>
+        <br>
+        <p><strong>Criar Responsavel financeiro:</strong><br>
+            Para realizar um novo cadastro de Responsável, Menu Cadastros -> Responsavel Financeiro -> Escolha entre Físico ou jurídica
+            Preencha o formulário e clique em Salvar.
+        </p>
+        <br>
+        <p><strong>Criar Paciente:</strong><br>
+            Para realizar um novo cadastro de Paciente, Menu Cadastros -> Novo Paciente -> Primeiro pesquise o Resposável Financeiro.
+            Após, preencha o formulario e clique em Salvar.
+        </p>
+        <br>
+        <p><strong>Ativa\Reativar cadastro:</strong><br>
+            Para realizar uma Ativação\Inativação de um Cadastro, Menu Cadastros -> Ativar\Inativar Cadastros -> Digite o ID e clique em OK.
+        </p>
+        <br>
+        <p><strong>SAIR:</strong><br>
+            No Menu haverá uma opção com o seu login -> clique Sair.
+        </p>
+    </body>
 </html>

@@ -65,11 +65,10 @@ public class CadastraRespFinJuridico implements Logica {
         Pessoa verificaCnpj = BD_2.getpj(cnpj2);
                 
         //Verifica se o CPF informado já existe no banco de dados
-        if (verificaCnpj == null) {
+        if (verificaCnpj != null) {
             sessao.setAttribute("msgErro", "Já existe um cadastro com esse CNPJ!");
             return "CadastroRespFinJuridico.jsp";
-        }
-         
+        }        
 
         //Pegar o código do endereço cadastrado anteriormente
         e.setcodigo(BD_2.getCodEndereco(new String(e.getcep()), e.getnumero()));
