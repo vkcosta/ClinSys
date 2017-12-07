@@ -17,6 +17,7 @@
 %>
 
 <link rel="stylesheet" type="text/css" href="menu.css" />
+<link rel="shortcut icon" href="favicon.ico" />
 
 <div id="logo" >
     <img src="logo.png" alt="Logo" width="300" heigth="400">    
