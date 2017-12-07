@@ -34,7 +34,7 @@ public class PesquisaRespFin implements Logica {
             for (int k = 0; k < responsavel.size(); k++) {
                 rf = (Pessoa) responsavel.get(k);
                 if (rf.getidPessoa() == idRespFin) {
-                    if (rf != null) {
+                    try {
                         if (rf instanceof RespFinFisico) {
                             rf = (RespFinFisico) rf;
                             sessao.setAttribute("rf", rf);
@@ -44,7 +44,9 @@ public class PesquisaRespFin implements Logica {
                             sessao.setAttribute("rf", rf);
                             return "ConsultaRespFin.jsp";
                         }
-                    }
+                    } catch (Exception e) {
+                        System.out.println("Erro no casting");
+                    };
                 }
             }
         } else {

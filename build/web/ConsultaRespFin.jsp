@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="Entidades.RespFinJuridico"%>
-<%@page import="Entidades.PessoaFisica"%>
 <%@page import="DAO.BD_2"%>
 <%@page import="Entidades.RespFinFisico"%>
 <%@page import="Entidades.Paciente"%>
@@ -88,7 +87,14 @@
         </form>
 
         <br>
-        <% rff = (RespFinFisico) sessao.getAttribute("rf"); %>
+        <!--Realiza o casing para responsavel financeiro Fidico e exibe os dados-->
+        <% try {
+                rff = (RespFinFisico) sessao.getAttribute("rf");
+            } catch (Exception e) {
+                rff = null;
+                
+            };
+        %>
 
         <%if (rff != null) {
         %>
@@ -254,8 +260,20 @@
                 </tr>
             </table>
         </fieldset> 
-        <%} else {
-            rfj = (RespFinJuridico) sessao.getAttribute("rf");%> 
+        <%}%>
+        
+        
+        <!--Realiza o casing para responsavel financeiro juridico e exibe os dados-->
+        <%
+       
+            try {
+                    rfj = (RespFinJuridico) sessao.getAttribute("rf");
+                } catch (Exception ex) {
+                    rfj = null;
+                };
+        
+        %>
+        
         <%if (rfj != null) {%>
         <!-- Formulário de responsavel juridico-->
 
@@ -271,7 +289,7 @@
                             <label for="nome">Razão Social: </label>
                         </td>
                         <td align="left">
-                            <input type="text" name="razaoSocial" placeholder="Razão Social" value="<%=rfj.getnome()%>">
+                            <input type="text" name="razaoSocial" placeholder="Razão Social" value="<%=rfj.getnome()%>" disabled="">
                         </td>    
                     </tr>
                     <tr>
@@ -279,7 +297,7 @@
                             <label>CNPJ:</label>
                         </td>
                         <td align="left">
-                            <input type="text" name="cnpj" size="14" placeholder="CNPJ" value="<%=rfj.getcnpj()%>">
+                            <input type="text" name="cnpj" size="14" placeholder="CNPJ" value="<%=rfj.getcnpj()%>" disabled="">
                         </td> 
 
                     </tr>                    
@@ -296,14 +314,14 @@
                             <label for="cep">CEP: </label>
                         </td>
                         <td align="left">
-                            <input type="text" name="cep" size="8" placeholder="CEP" value="<%=rfj.getendereco().getcep()%>">
+                            <input type="text" name="cep" size="8" placeholder="CEP" value="<%=rfj.getendereco().getcep()%>" disabled="">
                         </td>
 
                         <td>
                             <label for="numero">Numero:</label>
                         </td>
                         <td align="left">
-                            <input type="text" name="numero" size="4"placeholder="Número" value="<%=rfj.getendereco().getnumero()%>">
+                            <input type="text" name="numero" size="4"placeholder="Número" value="<%=rfj.getendereco().getnumero()%>" disabled="">
                         </td>
                     </tr>
                 </table>
@@ -319,20 +337,20 @@
                             <label for="email">E-mail: </label>
                         </td>
                         <td align="left">
-                            <input type="email" name="email" placeholder="Email" value="<%=rfj.getemail()%>">
+                            <input type="email" name="email" placeholder="Email" value="<%=rfj.getemail()%>" disabled="">
                         </td>
                         <td>
                             <label for="celular">Telefone Fixo: </label>
                         </td>
                         <td align="left">
-                            <input type="text" name="telFixo" placeholder="Telefone Fixo" value="<%=rfj.getendereco().gettelFixo()%>">
+                            <input type="text" name="telFixo" placeholder="Telefone Fixo" value="<%=rfj.getendereco().gettelFixo()%>" disabled="">
 
                         </td>
                     </tr>
                 </table>
             </fieldset> 
             <%}%>
-            <%}%>
+
             <% String erroRespFin = (String) sessao.getAttribute("erroRespFin"); %>
 
             <%if (erroRespFin != null) {%>
