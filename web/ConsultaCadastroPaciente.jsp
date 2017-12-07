@@ -62,7 +62,7 @@
                         </td>
                         <td></td>
                         <td align="center">
-                            ID: <input type="text" id="mostraID" name="mostraID" style="width:22px;" readonly="readonly">                            
+                            ID: <input type="text" id="mostraID" name="mostraID" style="width:25px;" readonly="readonly">                            
                         </td>
 
                         <td>   
@@ -91,14 +91,14 @@
                         <label for="idRespFin"> ID: </label>
                     </td>
                     <td align="left" width="22px">
-                        <input type="text" name="nome" value="<%=p.getRespFin().getidPessoa()%>">
+                        <input type="text" name="nome" value="<%=p.getRespFin().getidPessoa()%>" style="width:25px;" readonly="readonly">
                     </td>  
                     <td></td>
                     <td>
                         <label for="nome">Nome: </label>
                     </td>
-                    <td align="left" width="40px">
-                        <input type="text" name="nome" value="<%=p.getRespFin().getnome() %>">
+                    <td align="left" width="50px">
+                        <input type="text" name="nome" value="<%=p.getRespFin().getnome() %>" width="40px" style="width:250px;" readonly="readonly">
                     </td> 
                 </tr>
             </table>
@@ -113,7 +113,7 @@
                         <label for="nome">Nome: </label>
                     </td>
                     <td align="left" width="40px">
-                        <input type="text" name="nome" value="<%=p.getnome()%>">
+                        <input type="text" name="nome" value="<%=p.getnome()%>" style="width:250px;" readonly="readonly">
                     </td>                        
                     <td></td>
 
@@ -157,7 +157,7 @@
                         <label>CPF:</label>
                     </td>
                     <td align="left">
-                        <input type="text" name="cpf" size="11"  placeholder="CPF" value="<%=p.getcpf()%>">
+                        <input type="text" name="cpf" size="11"  placeholder="CPF" value="<%=p.getcpf()%>" readonly="readonly">
                     </td>
                     <td>
                     </td>
@@ -165,7 +165,7 @@
                         <label for="rg">RG: </label>
                     </td>
                     <td align="left">
-                        <input type="text" name="rg" size="9"  placeholder="RG" value="<%=p.getrg()%>"> 
+                        <input type="text" name="rg" size="9"  placeholder="RG" value="<%=p.getrg()%>" readonly="readonly"> 
                     </td>
                 </tr>
                 <tr>
@@ -197,14 +197,14 @@
                         <label for="cep">CEP: </label>
                     </td>
                     <td align="left">
-                        <input type="text" name="cep" size="8" placeholder="CEP" value="<%=p.getendereco().getcep()%>">
+                        <input type="text" name="cep" size="8" placeholder="CEP" value="<%=p.getendereco().getcep()%>" readonly="readonly">
                     </td>
 
                     <td>
                         <label for="numero">Numero:</label>
                     </td>
                     <td align="left">
-                        <input required type="text" name="numero" size="4" placeholder="Número" value="<%=p.getendereco().getnumero()%>">
+                        <input required type="text" name="numero" size="4" placeholder="Número" value="<%=p.getendereco().getnumero()%>" readonly="readonly">
                     </td>
                 </tr>
             </table>
@@ -220,7 +220,7 @@
                         <label for="email">E-mail: </label>
                     </td>
                     <td align="left">
-                        <input type="email" name="email" placeholder="Email" value="<%=p.getemail()%>">
+                        <input type="email" name="email" placeholder="Email" value="<%=p.getemail()%>" readonly="readonly">
                     </td>
 
                     <td>
@@ -228,9 +228,9 @@
                     </td>
                     <td>
                         <% if(p.getendereco().gettelFixo().equals("")){ %>
-                        <input type="text" name="telFixo" placeholder="Telefone Fixo" value=""> 
+                        <input type="text" name="telFixo" placeholder="Telefone Fixo" value="" readonly="readonly"> 
                         <%}else{%>
-                        <input type="text" name="telFixo" placeholder="Telefone Fixo" value="<%=p.getendereco().gettelFixo()%>">                            
+                        <input type="text" name="telFixo" placeholder="Telefone Fixo" value="<%=p.getendereco().gettelFixo()%>" readonly="readonly">                            
                         <%}%>
                     </td>
 
@@ -238,7 +238,7 @@
                         <label for="celular">Telefone Celular: </label>
                     </td>
                     <td align="left">
-                        <input type="text" name="telCelular" placeholder="Celular" value="<%=p.getcelular() %>">
+                        <input type="text" name="telCelular" placeholder="Celular" value="<%=p.getcelular() %>" readonly="readonly">
                         
                     </td>
                 </tr>
