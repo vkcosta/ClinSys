@@ -21,18 +21,16 @@ public class CadastraRespFinFisico implements Logica {
         RespFinFisico rff = new RespFinFisico();
         Date dataNasc = new Date();
         //Recupeção dos dados digitados no formulário
-        //Dados de Pessoa
         String nome = request.getParameter("nome");
         String dia = request.getParameter("dia");
         String mes = request.getParameter("mes");
         String ano = request.getParameter("ano");
+
         String cpf = request.getParameter("cpf");
         String rg = request.getParameter("rg");
         char sexo = request.getParameter("sexo").charAt(0);
-        //Dados de Endereço
         String cep = request.getParameter("cep");
         int numero = Integer.parseInt(request.getParameter("numero"));
-        //Dados de contato
         String email = request.getParameter("email");
         String telFixo = request.getParameter("telFixo");
         String telCelular = request.getParameter("telCelular");
@@ -74,13 +72,7 @@ public class CadastraRespFinFisico implements Logica {
             return "CadastroRespFinFisica.jsp";
         }
         //Cria e insere um novo Objeto do tipo endereço no banco de dados
-        Endereco e = new Endereco();
-        if (telFixo.equals("")) {
-            e = new Endereco(cep, numero, null);
-        } else {
-            e = new Endereco(cep, numero, telFixo);
-        }
-        
+        Endereco e = new Endereco(cep, numero, telFixo);
         try {
             BD_2.add(e);
         } catch (Exception ex) {
@@ -91,13 +83,10 @@ public class CadastraRespFinFisico implements Logica {
         int verificaCPF = BD_2.getidPessoa(cpf);
         PessoaFisica pf = BD_2.getPessoaFisica(verificaCPF);
         //Verifica se o CPF informado já existe no banco de dados
-        if(verificaCPF != 0) {
+        if (verificaCPF != 0) {
             sessao.setAttribute("msgErro", "Já existe um cadastro com esse CPF!");
             return "CadastroRespFinFisica.jsp";
         }
-        
-              
-        
         //Pegar o código do endereço cadastrado anteriormente
         e.setcodigo(BD_2.getCodEndereco(new String(e.getcep()), e.getnumero()));
         rff.setendereco(e);
@@ -109,7 +98,6 @@ public class CadastraRespFinFisico implements Logica {
         rff.setemail(email);
         rff.setcelular(telCelular);
         rff.setendereco(e);
-        rff.setstatus(true);
         BD_2.add(rff);
         sessao.setAttribute("msgSucesso", "Cadastro Realizado com Sucesso!");
         return "CadastroRespFinFisica.jsp";

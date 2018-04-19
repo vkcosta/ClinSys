@@ -44,6 +44,7 @@ public class Logar implements Logica {
             }
         } else {
             sessao.setAttribute("mensagem", "Usuário não Cadastrado!");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             return "index.jsp";
 
         }

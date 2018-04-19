@@ -14,8 +14,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="index.css">
         <link rel="stylesheet" type="text/js" href="index.js">
-        <!--Adição do ícone-->
-        <link rel="shortcut icon" href="favicon.ico" />
     </head>
     <body>       
         <div class="login-page">

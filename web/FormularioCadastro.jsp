@@ -1,4 +1,4 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="Entidades.RespFinFisico"%>
 <%@page import="Entidades.Pessoa"%>
 <%@page import="Entidades.Usuario"%>
@@ -12,30 +12,18 @@
     }
     String login = user.getlogin();
 
-    String msgErro = (String) sessao.getAttribute("msgErro");
-    String msgSucesso = (String) sessao.getAttribute("msgSucesso");
+    String msg = (String) sessao.getAttribute("erroID");
 %>
 
 <!--Alerta via JavaScript-->
-<%if (msgErro != null) {%>
+<%if (msg != null) {%>
 <script>
-    var sucesso = "<%=msgErro%>";
+    var sucesso = "<%=msg%>";
     alert(sucesso);
 </script>
 <%}
-    sessao.removeAttribute("msgErro");
+    sessao.removeAttribute("erroID");
 %>
-
-
-<%if (msgSucesso != null) {%>
-<script>
-    var sucesso = "<%=msgSucesso%>";
-    alert(sucesso);
-</script>
-<%}
-    sessao.removeAttribute("msgSucesso");
-%>
-
 
 <script>
     //Função javascript para 'pegar' o nome do Resp. selecionadao e exibir o Resp. ao lado.
@@ -50,7 +38,7 @@
 </script>
 <!--Fim dos Scritps--> 
 
-<form action="Controle" method="get">
+<form action="Controle" method="post">
     <fieldset>
         <legend>Responsável Financeiro</legend>
         <table cellspacing="10" >
@@ -72,10 +60,10 @@
                 </td>
                 <td></td>
                 <td align="center">
-                    ID: <input type="text" id="mostraID" name="mostraID" value=""  style="width:25px;" required autofocus readonly="readonly">
+                    ID: <input type="text" id="mostraID" name="mostraID" value="" class="form-control" id="disabledInput" disabled="" style="width:22px;" required autofocus>
                 </td>
                 <td>   
-                    Nome: <input type="text" id="mostraRespFin" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:300px;" >
+                    Nome: <input type="text" id="mostraRespFin" name="mostraRespFin" value="" class="form-control" id="disabledInput" disabled="" style="width:250px;" >
                 </td>
             </tr>            
         </table>
@@ -198,14 +186,14 @@
                     <label for="telFixo">Telefone Fixo:</label>
                 </td>
                 <td>
-                    <input  pattern="^\d{10}$" title="O campo deve conter 10 números" type="text" name="telFixo" maxlength="10" placeholder="Telefone Fixo">                            
+                    <input type="text" name="telFixo" placeholder="Telefone Fixo">                            
                 </td>
 
                 <td>
                     <label for="celular">*Telefone Celular: </label>
                 </td>
                 <td align="left">
-                    <input  pattern="^\d{11}$" title="O campo deve conter 11 números" required type="text" name="telCelular" maxlength="11" placeholder="Celular">
+                    <input  pattern="^\d{11}$" title="Somente números" required type="text" name="telCelular" maxlength="11" placeholder="Celular">
                     <font size="2">Formato: DD+Número</font>
                 </td>
             </tr>
@@ -214,7 +202,7 @@
     <h5><i>* Preenchimento obrigatório</i></h5>
     <br />
     <center>
-        <input type="hidden" name="logica" value="CadastraPaciente"/>
+        <input type="hidden" name="logica" value="CadastraRespFinFisico"/>
         <button >Salvar</button>
         <input type="reset" value="Limpar"></center>
 </form>

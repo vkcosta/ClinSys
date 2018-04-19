@@ -16,32 +16,9 @@
         response.sendRedirect("index.jsp");
     }
     String login = user.getlogin();
-    String msgSucesso = (String)sessao.getAttribute("msgSucesso");
-    String msgErro = (String)sessao.getAttribute("msgErro");
+
 
 %>
-
-<!--Alerta via JavaScript-->
-<%if(msgSucesso != null){ %>
-         <script>
-             var sucesso = "<%=msgSucesso%>";
-             
-                 alert(sucesso);
-             
-    </script>
-    <%}
-    sessao.removeAttribute("msgSucesso");
-    sessao.removeAttribute("msgErro");
-    %>
-   
-    <%if(msgErro != null){ %>
-         <script>
-             var erro = "<%=msgErro%>";             
-                 alert(erro);             
-        </script>
-    <%}%> 
-    
-<!--Fim dos Scritps--> 
 
 <!DOCTYPE html>
 <html>
@@ -52,30 +29,29 @@
     <body>
         <c:import url="menu.jsp"/>
         <br/>
-        <h2>Novo Responsável Financeiro Jurídico</h2>
-        <br>
+<h2>Novo Responsável Financeiro Jurídico</h2>
+<br>
         <form action="Controle">
             <fieldset>
                 <legend>Dados Pessoais</legend>
                 <table cellspacing="10" >
                     <tr>
                         <td>
-                            <label for="nome">*Razão Social: </label>
+                            <label for="nome">Razao Social: </label>
                         </td>
                         <td align="left">
-                            <input type="text" name="razaoSocial" placeholder="Razão Social" required>
+                            <input type="text" name="razaoSocial" placeholder="Razao Social">
                         </td>                      
 
 
                     </tr>
                     <tr>
                         <td>
-                            <label>*CNPJ:</label>
+                            <label>CNPJ:</label>
                         </td>
                         <td align="left">
-                            <input type="text" name="cnpj" size="14" maxlength="14" placeholder="CNPJ" pattern="^\d{14}$" title="Somente números" required>
-                        </td> 
-                        
+                            <input type="text" name="cnpj" size="14" maxlength="14" placeholder="CPF">
+                        </td>                        
                     </tr>                    
                 </table>
             </fieldset>
@@ -87,17 +63,17 @@
                 <table cellspacing="10">        
                     <tr>
                         <td>
-                            <label for="cep">*CEP: </label>
+                            <label for="cep">CEP: </label>
                         </td>
                         <td align="left">
-                            <input pattern="^\d{8}$" title="Somente números" required type="text" name="cep" size="8" maxlength="8" placeholder="CEP">
+                            <input type="text" name="cep" size="5" maxlength="5"> - <input type="text" name="cep2" size="3" maxlength="3">
                         </td>
 
                         <td>
-                            <label for="numero">*Numero:</label>
+                            <label for="numero">Numero:</label>
                         </td>
                         <td align="left">
-                            <input pattern="^\d{}$" title="Somente números" required type="text" name="numero" size="4" maxlength="7" placeholder="Número">
+                            <input type="text" name="numero" size="4" placeholder="Número">
                         </td>
                     </tr>
                 </table>
@@ -110,28 +86,25 @@
                 <table cellspacing="10">
                     <tr>
                         <td>
-                            <label for="email">*E-mail: </label>
+                            <label for="email">E-mail: </label>
                         </td>
                         <td align="left">
-                            <input type="email" name="email" placeholder="Email" maxlength="255" required>
+                            <input type="text" name="email" placeholder="Email">
+                        </td>
+
+                        <td>
+                            <label for="telFixo">Telefone Fixo:</label>
                         </td>
                         <td>
-                            <label for="celular">*Telefone Fixo: </label>
-                        </td>
-                        <td align="left">
-                            <input  pattern="^\d{10}$" title="Somente números" required type="text" name="telFixo" maxlength="10" placeholder="Telefone Fixo">
-                            <font size="2">Formato: DD+Número</font>
-                        </td>
+                            <input type="text" name="telFixo" placeholder="Telefone Fixo">
+                        </td>                       
                     </tr>
                 </table>
-            </fieldset>            
-            <h5><i>* Preenchimento obrigatório</i></h5>
+            </fieldset>
             <br />
-            <center>         
-
-                <input type="hidden" name="logica" value="CadastraRespFinJuridico"/>
-
-                <button >Salvar</button>
+            <center>
+                <input type="hidden" name="logica" value=""/>
+                <button >Cadastrar</button>
                 <input type="reset" value="Limpar"></center>
         </form>
     </body>

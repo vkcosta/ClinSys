@@ -4,7 +4,7 @@
     Author     : vito_
 --%>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="DAO.BD_2"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entidades.Usuario"%>
@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>CLINSYS - Cadastro de Paciente</title>
+        <title>CLINSYS - Cadastro de Pacient</title>
 
         <link rel="stylesheet" type="text/css" href="menu.css" />
 
